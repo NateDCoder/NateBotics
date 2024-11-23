@@ -74,6 +74,7 @@ async function fetchData1() {
     const data = await response.json();
     return data;
 }
+// Re deploying website commit
 async function populateTable(data) {
     const tableBody = document.querySelector("#sortable-table tbody");
 
