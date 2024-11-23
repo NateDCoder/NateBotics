@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../Statbotics_files/not_statbotic.ico">
+    <title>Totally Not Statbotics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow: auto;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container img {
+            width: 32px;
+            /* Adjust size as needed */
+            height: 32px;
+            margin-right: 10px;
+            /* Spacing between image and links */
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .buttons a:hover {
+            background-color: #555;
+        }
+
+        /* New styles for table */
+        .table-container {
+            width: 90%;
+            /* Container spans full width */
+            margin: 0 auto;
+            /* Center the container */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            position: sticky;
+            top: 0;
+            background-color: #f4f4f4;
+            z-index: 1;
+            /* Ensure it stays above the table rows */
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background-color: #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="../Javscript Files/teams.js"></script>
+    <div class="header">
+        <div class="nav-container">
+            
+            <!-- Image next to links -->
+            <a href="../main_page.html">
+                <img src="../Statbotics_files/not_statbotic.ico" alt="Logo">
+            </a>
+            <div class="nav-links">
+                <a href="#">Teams</a>
+                <a href="#">Events</a>
+                <a href="#">Matches</a>
+                <a href="#">Misc</a>
+            </div>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Search Teams and Events" style="padding: 5px;">
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="table-container">
+            <table id="sortable-table">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Number</th>
+                        <th onclick="sortTable(1)">Name</th>
+                        <th onclick="sortTable(2)">EPA Rank</th>
+                        <th onclick="sortTable(3)">Unitless EPA</th>
+                        <th onclick="sortTable(4)">EPA</th>
+                        <th onclick="sortTable(5)">Auto EPA</th>
+                        <th onclick="sortTable(6)">Teleop EPA</th>
+                        <th onclick="sortTable(7)">Endgame EPA</th>
+                        <th onclick="sortTable(8)">Next Event</th>
+                        <th onclick="sortTable(9)">Record</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data is dynamically added -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
