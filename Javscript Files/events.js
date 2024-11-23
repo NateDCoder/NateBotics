@@ -113,8 +113,8 @@ async function populateTable(data) {
         var redTeamElo = teamToElo[red1] + teamToElo[red2];
         var blueTeamElo = teamToElo[blue1] + teamToElo[blue2];
         var actualDifference = 0;
-        if (matches[125+i]) {
-            actualDifference = matches[125+i].redScore - matches[125+i].blueScore; 
+        if (matches[125 + i]) {
+            actualDifference = matches[125 + i].redScore - matches[125 + i].blueScore;
         }
         matchData.push({
             "Match Number": "Qual " + (i + 1),
@@ -122,7 +122,7 @@ async function populateTable(data) {
             "Red2": red2,
             "Blue1": blue1,
             "Blue2": blue2,
-            "score diff": 2 * parseInt(20.730805684966178 * 0.004 * (redTeamElo - blueTeamElo)),
+            "score diff": parseInt(20.730805684966178 * 0.004 * (redTeamElo - blueTeamElo)),
             "actual score diff": actualDifference,
             "win percentage": parseInt(100 / (1 + Math.pow(10, Math.min((redTeamElo - blueTeamElo), (blueTeamElo - redTeamElo)) / 400))) + "%"
         })
@@ -172,6 +172,7 @@ async function populateTable(data) {
         // Append the row to the table body
         tableBody.appendChild(row);
     });
+    return matchData
 }
 async function fetchAndPopulateTable() {
 
@@ -187,3 +188,72 @@ async function fetchAndPopulateTable() {
 document.addEventListener("DOMContentLoaded", () => {
     fetchAndPopulateTable();
 });
+
+async function getSOS() {
+    const data = await generateRankings();
+    const matchData = await populateTable(data);
+    const sortedTeams = Object.entries(data)
+        .filter(([key, value]) => !isNaN(value)) // Remove NaN values
+        .sort((a, b) => b[1] - a[1]);
+    var teamAverageResults = {};
+    var leagueTeams = [
+        '7360', '8492', '11617', '11618',
+        '11679', '11729', '26293', '27155',
+        '14015', '9895', '8511', '10644',
+        '10645', '15555', '26266', '19925',
+        '26538', '26606', '10735', '11193',
+        '13748', '19770', '8142', '8656',
+        '8734', '9458', '14018', '27277',
+        '6811', '10552'
+    ];
+
+    leagueTeams.forEach(team => {
+        teamAverageResults[team] = {"average wins":0, "SOS":0, "rank":0}
+    });
+    console.log(teamAverageResults)
+    for (let _ = 0; _ < 10000; _++) {
+        for (let i = 0; i < matchData.length; i++) {
+
+            var win = Math.random();
+            if (win < parseInt(matchData[i]["win percentage"])/100) {
+                if (matchData[i]["score diff"] < 0) {
+                    // console.log(matchData[i]["Blue1"])
+                    // console.log(teamAverageResults[matchData[i]["Blue1"]]["average wins"]);
+                    teamAverageResults[matchData[i]["Blue1"]]["average wins"] ++;
+                    teamAverageResults[matchData[i]["Blue2"]]["average wins"] ++;
+                }else {
+                    teamAverageResults[matchData[i]["Red1"]]["average wins"] ++;
+                    teamAverageResults[matchData[i]["Red2"]]["average wins"] ++;
+                }
+            }else {
+                console.log("UPset")
+                if (matchData[i]["score diff"] > 0) {
+                    teamAverageResults[matchData[i]["Blue1"]]["average wins"] ++;
+                    teamAverageResults[matchData[i]["Blue2"]]["average wins"] ++;
+                }else {
+                    teamAverageResults[matchData[i]["Red1"]]["average wins"] ++;
+                    teamAverageResults[matchData[i]["Red2"]]["average wins"] ++;
+                } 
+            }
+        }
+        // console.log(_);
+    }
+    console.log(teamAverageResults)
+    for (let team of leagueTeams) {
+        teamAverageResults[team]["average wins"] /= 10000;
+    }
+    console.log(teamAverageResults)
+    const sortedLeagueRank = Object.entries(teamAverageResults)
+    .sort(([, a], [, b]) => b["average wins"] - a["average wins"]);
+    for (let i = 0; i < sortedLeagueRank.length; i++) {
+        teamAverageResults[sortedLeagueRank[i][0]]["rank"] = i;
+    }
+    for (let i = 0; i < sortedTeams.length; i++) {
+        teamAverageResults[sortedTeams[i][0]]["SOS"] = i - teamAverageResults[sortedTeams[i][0]]["rank"]
+    }
+    const sortedSOS = Object.entries(teamAverageResults)
+    .sort(([, a], [, b]) => b["SOS"] - a["SOS"]);
+    console.log(sortedLeagueRank);
+    console.log(sortedSOS)
+    console.log(sortedTeams)
+}   
