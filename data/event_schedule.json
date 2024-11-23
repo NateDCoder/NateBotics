@@ -1,0 +1,919 @@
+{
+    "schedule": [
+        {
+            "description": "Qualification 1",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 1,
+            "startTime": "2024-11-13T18:00:00",
+            "actualStartTime": "2024-11-13T18:10:40.98",
+            "postResultTime": "2024-11-13T18:16:50.906",
+            "scoreRedFinal": 15,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 6,
+            "scoreBlueFinal": 65,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 11,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 8142,
+                    "displayTeamNumber": "8142",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Red)"
+                },
+                {
+                    "teamNumber": 11617,
+                    "displayTeamNumber": "11617",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Glitch"
+                },
+                {
+                    "teamNumber": 27277,
+                    "displayTeamNumber": "27277",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr. Mountie Megabots (White)"
+                },
+                {
+                    "teamNumber": 11618,
+                    "displayTeamNumber": "11618",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Gremlins"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 2",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 2,
+            "startTime": "2024-11-13T18:08:00",
+            "actualStartTime": "2024-11-13T18:18:57.21",
+            "postResultTime": "2024-11-13T18:23:32.329",
+            "scoreRedFinal": 71,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 18,
+            "scoreBlueFinal": 90,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 15,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 14018,
+                    "displayTeamNumber": "14018",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Black)"
+                },
+                {
+                    "teamNumber": 26293,
+                    "displayTeamNumber": "26293",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Surge"
+                },
+                {
+                    "teamNumber": 11193,
+                    "displayTeamNumber": "11193",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "The Flying Dutchbots"
+                },
+                {
+                    "teamNumber": 11729,
+                    "displayTeamNumber": "11729",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Crash"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 3",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 3,
+            "startTime": "2024-11-13T18:16:00",
+            "actualStartTime": "2024-11-13T18:25:45.993",
+            "postResultTime": "2024-11-13T18:30:21.681",
+            "scoreRedFinal": 60,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 11,
+            "scoreBlueFinal": 210,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 47,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 10645,
+                    "displayTeamNumber": "10645",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Hornet Hackers"
+                },
+                {
+                    "teamNumber": 19925,
+                    "displayTeamNumber": "19925",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Techno Titans"
+                },
+                {
+                    "teamNumber": 26606,
+                    "displayTeamNumber": "26606",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "H.I.V.E."
+                },
+                {
+                    "teamNumber": 15555,
+                    "displayTeamNumber": "15555",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "S.W.A.R.M."
+                }
+            ]
+        },
+        {
+            "description": "Qualification 4",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 4,
+            "startTime": "2024-11-13T18:24:00",
+            "actualStartTime": "2024-11-13T18:33:59.929",
+            "postResultTime": "2024-11-13T18:37:57.388",
+            "scoreRedFinal": 32,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 6,
+            "scoreBlueFinal": 116,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 13,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 11618,
+                    "displayTeamNumber": "11618",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Gremlins"
+                },
+                {
+                    "teamNumber": 11617,
+                    "displayTeamNumber": "11617",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Glitch"
+                },
+                {
+                    "teamNumber": 11193,
+                    "displayTeamNumber": "11193",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "The Flying Dutchbots"
+                },
+                {
+                    "teamNumber": 26293,
+                    "displayTeamNumber": "26293",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Surge"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 5",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 5,
+            "startTime": "2024-11-13T18:32:00",
+            "actualStartTime": "2024-11-13T18:40:37.168",
+            "postResultTime": "2024-11-13T18:45:57.743",
+            "scoreRedFinal": 108,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 23,
+            "scoreBlueFinal": 135,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 32,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 11729,
+                    "displayTeamNumber": "11729",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Crash"
+                },
+                {
+                    "teamNumber": 15555,
+                    "displayTeamNumber": "15555",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "S.W.A.R.M."
+                },
+                {
+                    "teamNumber": 10645,
+                    "displayTeamNumber": "10645",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Hornet Hackers"
+                },
+                {
+                    "teamNumber": 8142,
+                    "displayTeamNumber": "8142",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Red)"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 6",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 6,
+            "startTime": "2024-11-13T18:40:00",
+            "actualStartTime": "2024-11-13T18:46:51.712",
+            "postResultTime": "2024-11-13T18:50:48.059",
+            "scoreRedFinal": 60,
+            "scoreRedFoul": 5,
+            "scoreRedAuto": 14,
+            "scoreBlueFinal": 60,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 3,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": false,
+            "teams": [
+                {
+                    "teamNumber": 26606,
+                    "displayTeamNumber": "26606",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "H.I.V.E."
+                },
+                {
+                    "teamNumber": 27277,
+                    "displayTeamNumber": "27277",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr. Mountie Megabots (White)"
+                },
+                {
+                    "teamNumber": 19925,
+                    "displayTeamNumber": "19925",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Techno Titans"
+                },
+                {
+                    "teamNumber": 14018,
+                    "displayTeamNumber": "14018",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Black)"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 7",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 7,
+            "startTime": "2024-11-13T18:48:00",
+            "actualStartTime": "2024-11-13T18:55:51.404",
+            "postResultTime": "2024-11-13T18:59:26.937",
+            "scoreRedFinal": 17,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 6,
+            "scoreBlueFinal": 105,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 31,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 11729,
+                    "displayTeamNumber": "11729",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Crash"
+                },
+                {
+                    "teamNumber": 11618,
+                    "displayTeamNumber": "11618",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Gremlins"
+                },
+                {
+                    "teamNumber": 11617,
+                    "displayTeamNumber": "11617",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Glitch"
+                },
+                {
+                    "teamNumber": 15555,
+                    "displayTeamNumber": "15555",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "S.W.A.R.M."
+                }
+            ]
+        },
+        {
+            "description": "Qualification 8",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 8,
+            "startTime": "2024-11-13T18:56:00",
+            "actualStartTime": "2024-11-13T19:03:43.155",
+            "postResultTime": "2024-11-13T19:07:35.024",
+            "scoreRedFinal": 137,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 21,
+            "scoreBlueFinal": 106,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 33,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": true,
+            "blueWins": false,
+            "teams": [
+                {
+                    "teamNumber": 19925,
+                    "displayTeamNumber": "19925",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Techno Titans"
+                },
+                {
+                    "teamNumber": 10645,
+                    "displayTeamNumber": "10645",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Hornet Hackers"
+                },
+                {
+                    "teamNumber": 27277,
+                    "displayTeamNumber": "27277",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr. Mountie Megabots (White)"
+                },
+                {
+                    "teamNumber": 11193,
+                    "displayTeamNumber": "11193",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "The Flying Dutchbots"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 9",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 9,
+            "startTime": "2024-11-13T19:04:00",
+            "actualStartTime": "2024-11-13T19:09:23.041",
+            "postResultTime": "2024-11-13T19:13:34.25",
+            "scoreRedFinal": 74,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 6,
+            "scoreBlueFinal": 103,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 10,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 8142,
+                    "displayTeamNumber": "8142",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Red)"
+                },
+                {
+                    "teamNumber": 26606,
+                    "displayTeamNumber": "26606",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "H.I.V.E."
+                },
+                {
+                    "teamNumber": 26293,
+                    "displayTeamNumber": "26293",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Surge"
+                },
+                {
+                    "teamNumber": 14018,
+                    "displayTeamNumber": "14018",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Black)"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 10",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 10,
+            "startTime": "2024-11-13T19:12:00",
+            "actualStartTime": "2024-11-13T19:16:02.629",
+            "postResultTime": "2024-11-13T19:19:53.439",
+            "scoreRedFinal": 193,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 37,
+            "scoreBlueFinal": 76,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 14,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": true,
+            "blueWins": false,
+            "teams": [
+                {
+                    "teamNumber": 11193,
+                    "displayTeamNumber": "11193",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "The Flying Dutchbots"
+                },
+                {
+                    "teamNumber": 15555,
+                    "displayTeamNumber": "15555",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "S.W.A.R.M."
+                },
+                {
+                    "teamNumber": 27277,
+                    "displayTeamNumber": "27277",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr. Mountie Megabots (White)"
+                },
+                {
+                    "teamNumber": 11729,
+                    "displayTeamNumber": "11729",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Crash"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 11",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 11,
+            "startTime": "2024-11-13T19:20:00",
+            "actualStartTime": "2024-11-13T19:22:06.643",
+            "postResultTime": "2024-11-13T19:25:48.045",
+            "scoreRedFinal": 39,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 3,
+            "scoreBlueFinal": 73,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 3,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 14018,
+                    "displayTeamNumber": "14018",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Black)"
+                },
+                {
+                    "teamNumber": 19925,
+                    "displayTeamNumber": "19925",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Techno Titans"
+                },
+                {
+                    "teamNumber": 8142,
+                    "displayTeamNumber": "8142",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Red)"
+                },
+                {
+                    "teamNumber": 11618,
+                    "displayTeamNumber": "11618",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Gremlins"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 12",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 12,
+            "startTime": "2024-11-13T19:28:00",
+            "actualStartTime": "2024-11-13T19:28:16.05",
+            "postResultTime": "2024-11-13T19:32:27.402",
+            "scoreRedFinal": 90,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 18,
+            "scoreBlueFinal": 155,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 44,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 11617,
+                    "displayTeamNumber": "11617",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Glitch"
+                },
+                {
+                    "teamNumber": 26293,
+                    "displayTeamNumber": "26293",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Surge"
+                },
+                {
+                    "teamNumber": 10645,
+                    "displayTeamNumber": "10645",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Hornet Hackers"
+                },
+                {
+                    "teamNumber": 26606,
+                    "displayTeamNumber": "26606",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "H.I.V.E."
+                }
+            ]
+        },
+        {
+            "description": "Qualification 13",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 13,
+            "startTime": "2024-11-13T19:36:00",
+            "actualStartTime": "2024-11-13T19:34:26.689",
+            "postResultTime": "2024-11-13T19:38:23.284",
+            "scoreRedFinal": 125,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 19,
+            "scoreBlueFinal": 115,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 13,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": true,
+            "blueWins": false,
+            "teams": [
+                {
+                    "teamNumber": 11193,
+                    "displayTeamNumber": "11193",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "The Flying Dutchbots"
+                },
+                {
+                    "teamNumber": 8142,
+                    "displayTeamNumber": "8142",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Red)"
+                },
+                {
+                    "teamNumber": 15555,
+                    "displayTeamNumber": "15555",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "S.W.A.R.M."
+                },
+                {
+                    "teamNumber": 14018,
+                    "displayTeamNumber": "14018",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr Mountie Megabots (Black)"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 14",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 14,
+            "startTime": "2024-11-13T19:44:00",
+            "actualStartTime": "2024-11-13T19:41:19.687",
+            "postResultTime": "2024-11-13T19:44:59.909",
+            "scoreRedFinal": 70,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 18,
+            "scoreBlueFinal": 99,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 9,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": false,
+            "blueWins": true,
+            "teams": [
+                {
+                    "teamNumber": 11617,
+                    "displayTeamNumber": "11617",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Glitch"
+                },
+                {
+                    "teamNumber": 27277,
+                    "displayTeamNumber": "27277",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Jr. Mountie Megabots (White)"
+                },
+                {
+                    "teamNumber": 19925,
+                    "displayTeamNumber": "19925",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Techno Titans"
+                },
+                {
+                    "teamNumber": 26293,
+                    "displayTeamNumber": "26293",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Surge"
+                }
+            ]
+        },
+        {
+            "description": "Qualification 15",
+            "tournamentLevel": "QUALIFICATION",
+            "series": 0,
+            "matchNumber": 15,
+            "startTime": "2024-11-13T19:52:00",
+            "actualStartTime": "2024-11-13T19:47:01.767",
+            "postResultTime": "2024-11-13T19:50:37.364",
+            "scoreRedFinal": 159,
+            "scoreRedFoul": 0,
+            "scoreRedAuto": 37,
+            "scoreBlueFinal": 31,
+            "scoreBlueFoul": 0,
+            "scoreBlueAuto": 14,
+            "scoreBlueDriveControlled": null,
+            "scoreBlueEndgame": null,
+            "redWins": true,
+            "blueWins": false,
+            "teams": [
+                {
+                    "teamNumber": 11618,
+                    "displayTeamNumber": "11618",
+                    "station": "Blue2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Gremlins"
+                },
+                {
+                    "teamNumber": 26606,
+                    "displayTeamNumber": "26606",
+                    "station": "Blue1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "H.I.V.E."
+                },
+                {
+                    "teamNumber": 11729,
+                    "displayTeamNumber": "11729",
+                    "station": "Red2",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Chelsea Crash"
+                },
+                {
+                    "teamNumber": 10645,
+                    "displayTeamNumber": "10645",
+                    "station": "Red1",
+                    "surrogate": false,
+                    "noShow": false,
+                    "dq": false,
+                    "onField": true,
+                    "teamName": "Hornet Hackers"
+                }
+            ]
+        }
+    ]
+}
