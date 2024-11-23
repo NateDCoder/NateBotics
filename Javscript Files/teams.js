@@ -65,7 +65,11 @@ async function generateRankings() {
     });
     var week1STD = 20.730805684966178;
     var matchInfo = await fetchData1();
+    var multipier = 1
     for (let i = 0; i < matchInfo.length; i++) {
+        if (i >= 125) {
+            multipier = 1.5
+        }
         console.log(matchInfo.length)
         var match = matchInfo[i]
         var redTeam = match.redTeams;
@@ -78,7 +82,7 @@ async function generateRankings() {
 
         var predictedScoreMargin = 0.004 * (redElo - blueElo);
         var actualScoreMargin = (redScore - blueScore) / week1STD;
-        var eloDelta = 12 * (actualScoreMargin - predictedScoreMargin)
+        var eloDelta = multipier * 12 * (actualScoreMargin - predictedScoreMargin)
 
         eloRatings[redTeam[0]] += eloDelta;
         eloRatings[redTeam[1]] += eloDelta;

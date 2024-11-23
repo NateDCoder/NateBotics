@@ -19,7 +19,7 @@ async function generateRankings() {
         var multipier = 1
         for (let i = 0; i < matchInfo.length; i++) {
             if (i >= 125) {
-                multipier = 1.75
+                multipier = 1.5
             }
             console.log(matchInfo.length)
             var match = matchInfo[i]
