@@ -69,6 +69,11 @@ async function fetchJSONData(filePath) {
         console.error("Unable to fetch data:", error);
     }
 }
+async function fetchData1() {
+    const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/data1');
+    const data = await response.json();
+    return data;
+}
 async function populateTable(data) {
     const tableBody = document.querySelector("#sortable-table tbody");
 
@@ -76,8 +81,10 @@ async function populateTable(data) {
     tableBody.innerHTML = "";
     var teamToElo = data;
     var schedule = (await fetchJSONData("../data/event_schedule.json")).schedule;
+    var matches = await fetchData1();
     matchData = [];
     console.log(schedule.length)
+
     for (let i = 0; i < schedule.length; i++) {
         var red1;
         var red2;
@@ -105,7 +112,10 @@ async function populateTable(data) {
         }
         var redTeamElo = teamToElo[red1] + teamToElo[red2];
         var blueTeamElo = teamToElo[blue1] + teamToElo[blue2];
-
+        var actualDifference = 0;
+        if (matches[125+i]) {
+            actualDifference = matches[125+i].redScore - matches[125+i].blueScore; 
+        }
         matchData.push({
             "Match Number": "Qual " + (i + 1),
             "Red1": red1,
@@ -113,6 +123,7 @@ async function populateTable(data) {
             "Blue1": blue1,
             "Blue2": blue2,
             "score diff": 2 * parseInt(20.730805684966178 * 0.004 * (redTeamElo - blueTeamElo)),
+            "actual score diff": actualDifference,
             "win percentage": parseInt(100 / (1 + Math.pow(10, Math.min((redTeamElo - blueTeamElo), (blueTeamElo - redTeamElo)) / 400))) + "%"
         })
     }
@@ -134,6 +145,14 @@ async function populateTable(data) {
                 cell.style.backgroundColor = "rgb(238, 238, 255)";
                 cell.style.color = "rgb(29 78 216)";
             } else if (index === 5) {
+                if (value < 0) {
+                    cell.style.backgroundColor = "rgb(238, 238, 255)";
+                    cell.style.color = "rgb(29 78 216)";
+                } else {
+                    cell.style.backgroundColor = "rgb(255, 238, 238)";
+                    cell.style.color = "rgb(29 78 216)";
+                }
+            } else if (index === 6) {
                 if (value < 0) {
                     cell.style.backgroundColor = "rgb(238, 238, 255)";
                     cell.style.color = "rgb(29 78 216)";
