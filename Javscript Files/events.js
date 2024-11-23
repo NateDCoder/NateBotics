@@ -122,7 +122,7 @@ async function populateTable(data) {
             "Red2": red2,
             "Blue1": blue1,
             "Blue2": blue2,
-            "score diff": 1.2*parseInt(20.730805684966178 * 0.004 * (redTeamElo - blueTeamElo)),
+            "score diff": parseInt(1.2*20.730805684966178 * 0.004 * (redTeamElo - blueTeamElo)),
             "actual score diff": actualDifference,
             "win percentage": parseInt(100 / (1 + Math.pow(10, Math.min((redTeamElo - blueTeamElo), (blueTeamElo - redTeamElo)) / 400))) + "%"
         })
