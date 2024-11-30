@@ -213,7 +213,16 @@ async function getSOS() {
     console.log(teamAverageResults)
     for (let _ = 0; _ < 10000; _++) {
         for (let i = 0; i < matchData.length; i++) {
-
+            if (i < 20) {
+                if (matchData[i]["actual score diff"] < 0) {
+                    teamAverageResults[matchData[i]["Blue1"]]["average wins"] ++;
+                    teamAverageResults[matchData[i]["Blue2"]]["average wins"] ++;
+                }else {
+                    teamAverageResults[matchData[i]["Red1"]]["average wins"] ++;
+                    teamAverageResults[matchData[i]["Red2"]]["average wins"] ++;
+                }
+                continue;
+            }
             var win = Math.random();
             if (win < parseInt(matchData[i]["win percentage"])/100) {
                 if (matchData[i]["score diff"] < 0) {
@@ -256,4 +265,32 @@ async function getSOS() {
     console.log(sortedLeagueRank);
     console.log(sortedSOS)
     console.log(sortedTeams)
+    const csvContent = convertToCSV(sortedLeagueRank);
+    downloadCSV("teams_data.csv", csvContent);
 }   
+
+function convertToCSV(data) {
+    // CSV header
+    let csvContent = "Team,Average Wins,SOS,Rank\n";
+    
+    // Add each row of data
+    data.forEach(row => {
+        const team = row[0];
+        const stats = row[1];
+        csvContent += `${team},${stats["average wins"]},${stats.SOS},${stats.rank}\n`;
+    });
+
+    return csvContent;
+}
+
+function downloadCSV(filename, content) {
+    const blob = new Blob([content], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    // document.body.removeChild(a);
+}

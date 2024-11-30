@@ -32,6 +32,13 @@ async function fetchData1() {
     const data = await response.json();
     return data;
 }
+
+async function fetchTeamList() {
+    const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/Team_List');
+    const data = await response.json();
+    return data;
+}
+
 async function fetchData2() {
     const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/data2');
     const data = await response.json();
@@ -49,67 +56,19 @@ async function fetchJSONData(filePath) {
     }
 }
 async function generateRankings() {
-    var leagueTeams = [
-        '7360', '8492', '11617', '11618',
-        '11679', '11729', '26293', '27155',
-        '14015', '9895', '8511', '10644',
-        '10645', '15555', '26266', '19925',
-        '26538', '26606', '10735', '11193',
-        '13748', '19770', '8142', '8656',
-        '8734', '9458', '14018', '27277',
-        '6811', '10552'
-    ];
-    var eloRatings = {};
-    leagueTeams.forEach(team => {
-        eloRatings[team] = 1500; // Assign random Elo values
-    });
-    var week1STD = 20.730805684966178;
-    var matchInfo = await fetchData1();
-    var multipier = 1
-    for (let i = 0; i < matchInfo.length; i++) {
-        if (i >= 125) {
-            multipier = 1.5
-        }
-        console.log(matchInfo.length)
-        var match = matchInfo[i]
-        var redTeam = match.redTeams;
-        var blueTeam = match.blueTeams;
-
-        var redScore = match.redScore;
-        var blueScore = match.blueScore;
-        var redElo = eloRatings[redTeam[0]] + eloRatings[redTeam[1]]
-        var blueElo = eloRatings[blueTeam[0]] + eloRatings[blueTeam[1]]
-
-        var predictedScoreMargin = 0.004 * (redElo - blueElo);
-        var actualScoreMargin = (redScore - blueScore) / week1STD;
-        var eloDelta = multipier * 12 * (actualScoreMargin - predictedScoreMargin)
-
-        eloRatings[redTeam[0]] += eloDelta;
-        eloRatings[redTeam[1]] += eloDelta;
-
-        eloRatings[blueTeam[0]] -= eloDelta;
-        eloRatings[blueTeam[1]] -= eloDelta;
-
-    }
-    const sortedTeams = Object.entries(eloRatings)
-        .filter(([key, value]) => !isNaN(value)) // Remove NaN values
-        .sort((a, b) => b[1] - a[1]); // Sort by value in ascending order
-
-    var numberToName = await fetchJSONData("../data/Number to Name.json");
-    // for (let i = 0; i < sortedTeams.length; i++) {
-    //     process.stdout.write(sortedTeams[i][1] + ",")
-    // }
+    let teamListData = await fetchTeamList()
     var teamData = [];
-    for (let i = 0; i < sortedTeams.length; i++) {
+    console.log(teamListData)
+    for (let team of teamListData) {
         teamData.push({
-            "number": sortedTeams[i][0],
-            "name": numberToName[sortedTeams[i][0]],
-            "epaRank": (i + 1),
-            "unitlessEPA": Math.floor(sortedTeams[i][1]),
-            "epa": "N/A",
-            "autoEPA": "N/A",
-            "teleopEPA": "N/A",
-            "endgameEPA": "N/A",
+            "number": team["Number"],
+            "name":team["Name"],
+            "epaRank": team["EPA Rank"],
+            "unitlessEPA": Math.round(team["Unitless EPA"]),
+            "epa": Math.round(team["EPA"]*10)/10,
+            "autoEPA": Math.round(team["Auto EPA"]*10)/10,
+            "teleopEPA": Math.round(team["TeleOp EPA"]*10)/10,
+            "endgameEPA": Math.round(team["Endgame EPA"]*10)/10,
             "nextEvent": "N/A",
             "record": "N/A"
         })
