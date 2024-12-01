@@ -65,61 +65,61 @@
             background-color: #555;
         }
 
-        .table-container {
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        thead {
-            background-color: #f4f4f4;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            cursor: pointer;
-            background-color: #f9f9f9;
-        }
-
-        th:hover {
-            background-color: #eaeaea;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:nth-child(odd) {
-            background-color: #fff;
-        }
-
-        td:last-child {
-            font-weight: bold;
-        }
-
-        td[style*="background-color"] {
-            border-radius: 5px;
-            padding: 5px;
-        }
-
         .main-content {
             text-align: center;
             padding: 50px 20px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            /* Light background */
+        }
+
+        .completed-events {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+        a {text-decoration: none; }
+        .event-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgb(219 234 254);
+            cursor: pointer;
+        }
+
+        .event-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .event-card p {
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
@@ -143,37 +143,14 @@
             <input type="text" placeholder="Search Teams and Events" style="padding: 5px;">
         </div>
     </div>
-    <div style="margin-left: 8%; margin-top: 1%;"><strong>Match Predictions</strong></div>
-    <div style="margin-left: 8%; margin-top: 1%;">Remember, match predictions are just for fun, you control your own destiny!</div>
     <div class="main-content">
-        <div class="table-container">
-            <table id="sortable-table">
-                <thead>
-                    <tr>
-                        <th>Match</th>
-                        <th colspan="2">Red Alliance</th>
-                        <th colspan="2">Blue Alliance</th>
-                        <th>Score Diff</th>
-                        <th>Actual Diff</th>
-                        <th>Win Pred</th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th>Team 1</th>
-                        <th>Team 2</th>
-                        <th>Team 1</th>
-                        <th>Team 2</th>
-                        <th>Red(+) Blue(-)</th>
-                        <th>Red(+) Blue(-)</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Add more rows dynamically -->
-                </tbody>
-            </table>
+        <div class="completed-events">
+            <h2>Total Events (64)</h2>
+            <div class="events-container">
+                <!-- Data is dynamically added -->
+            </div>
         </div>
-        <button onclick="getSOS()">Simulate SOS</button>
+
     </div>
 </body>
 
