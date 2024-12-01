@@ -332,11 +332,12 @@ Object.entries(eventNames).forEach(([code, name]) => {
             }
             function noMatchesInsightData(eventInfo) {
                 var teamData = [];
+                let i = 1;
                 for (let team of eventInfo.preEloTeamList) {
                     teamData.push({
                         "number": team["Number"],
                         "name": team["Name"],
-                        "EPA Rank": team["EPA Rank"],
+                        "Estimate Rank":i,
                         "epa": Math.round(team["EPA"] * 10) / 10,
                         "autoEPA": Math.round(team["Auto EPA"] * 10) / 10,
                         "teleopEPA": Math.round(team["TeleOp EPA"] * 10) / 10,
@@ -345,8 +346,10 @@ Object.entries(eventNames).forEach(([code, name]) => {
                         "record": "N/A",
                         "Auto EPA Rank": team["Auto EPA Rank"],
                         "TeleOp EPA Rank": team["TeleOp EPA Rank"],
-                        "Endgame EPA Rank": team["Endgame EPA Rank"]
+                        "Endgame EPA Rank": team["Endgame EPA Rank"],
+                        "EPA Rank": team["EPA Rank"]
                     })
+                    i++;
                 }
                 return teamData
             }
@@ -380,7 +383,7 @@ Object.entries(eventNames).forEach(([code, name]) => {
                     insightTable.innerText = "No Event Info"
                 }
                 if (!eventInfo["hasScheduleist"]) {
-                    \`<thead>
+                    insightTable.innerHTML = \`<thead>
                         <tr>
                             <th onclick="sortTable(0, 'insights-table')">Number</th>
                             <th onclick="sortTable(1, 'insights-table')">Name</th>
