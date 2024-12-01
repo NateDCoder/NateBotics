@@ -62,17 +62,21 @@ async function generateRankings() {
     for (let team of teamListData) {
         teamData.push({
             "number": team["Number"],
-            "name":team["Name"],
-            "epaRank": team["EPA Rank"],
+            "name": team["Name"],
+            "EPA Rank": team["EPA Rank"],
             "unitlessEPA": Math.round(team["Unitless EPA"]),
-            "epa": Math.round(team["EPA"]*10)/10,
-            "autoEPA": Math.round(team["Auto EPA"]*10)/10,
-            "teleopEPA": Math.round(team["TeleOp EPA"]*10)/10,
-            "endgameEPA": Math.round(team["Endgame EPA"]*10)/10,
+            "epa": Math.round(team["EPA"] * 10) / 10,
+            "autoEPA": Math.round(team["Auto EPA"] * 10) / 10,
+            "teleopEPA": Math.round(team["TeleOp EPA"] * 10) / 10,
+            "endgameEPA": Math.round(team["Endgame EPA"] * 10) / 10,
             "nextEvent": "N/A",
-            "record": "N/A"
+            "record": "N/A",
+            "Auto EPA Rank": team["Auto EPA Rank"],
+            "TeleOp EPA Rank": team["TeleOp EPA Rank"],
+            "Endgame EPA Rank": team["Endgame EPA Rank"]
         })
     }
+
     return teamData
 }
 
@@ -82,31 +86,66 @@ function populateTable(data) {
 
     // Clear existing rows (if any)
     tableBody.innerHTML = "";
-
+    const totalAmountOfTeams = 533
     // Loop through the data and create rows
-    data.forEach(team => {
+    for (let team of data) {
         const row = document.createElement("tr");
 
         // Create cells for each data point
         Object.values(team).forEach((value, index) => {
-            const cell = document.createElement("td");
-        
-            // Check if this is the second row
-            if (index === 1) {  // 0-based index, so 1 is the second row
-                const link = document.createElement("a");
-                link.href = "./team htmls/"+value+".html";  // Set the desired link
-                link.textContent = value;  // Add the value as the link text
-                cell.appendChild(link);
-            } else {
-                cell.textContent = value;  // For other rows, just set text content
+            if (index < 10) {
+                const cell = document.createElement("td");
+
+                // Check if this is the second row
+                if (index === 1) {  // 0-based index, so 1 is the second row
+                    const link = document.createElement("a");
+                    link.href = "./team htmls/" + value + ".html";  // Set the desired link
+                    link.textContent = value;  // Add the value as the link text
+                    cell.appendChild(link);
+                } else if (4 <= index && index <= 7) {
+                    const div = document.createElement("div");  
+                    let rank;
+                    switch (index) {
+                        case 4:
+                            rank = "EPA Rank"
+                            break;
+                        case 5:
+                            rank = "Auto EPA Rank"
+                            break;
+                        case 6:
+                            rank = "TeleOp EPA Rank"
+                            break;
+                        case 7:
+                            rank = "Endgame EPA Rank"
+                            break;
+                    }
+                    let percentile = 1 - team[rank] / totalAmountOfTeams;
+
+                    if (percentile < .25) {
+                        div.className = "red-style"
+                    } else if (percentile < .75) {
+                        div.className = "white-style"
+                    } else if (percentile < .9) {
+                        div.className = "light-green-style"
+                    } else if (percentile < .99) {
+                        div.className = "dark-green-style"
+                    } else {
+                        div.className = "blue-style"
+
+                    }
+                    div.textContent = value
+                    cell.appendChild(div)
+                }
+                else {
+                    cell.textContent = value;  // For other rows, just set text content
+                }
+                row.appendChild(cell);
             }
-        
-            row.appendChild(cell);
         });
 
         // Append the row to the table body
         tableBody.appendChild(row);
-    });
+    }
 }
 
 // Fetch JSON data and populate the table

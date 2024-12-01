@@ -12,7 +12,6 @@
             margin: 0;
             padding: 0;
             color: #333;
-            overflow: auto;
         }
 
         .header {
@@ -47,11 +46,6 @@
             text-decoration: underline;
         }
 
-        .main-content {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
         .buttons {
             display: flex;
             justify-content: center;
@@ -71,39 +65,39 @@
             background-color: #555;
         }
 
-        /* New styles for table */
         .table-container {
-            width: 80%;
-            /* Container spans full width */
+            width: 90%;
             margin: 0 auto;
-            /* Center the container */
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: center;
         }
 
-        table thead {
+        thead {
+            background-color: #f4f4f4;
             position: sticky;
             top: 0;
-            background-color: #f4f4f4;
             z-index: 1;
-            /* Ensure it stays above the table rows */
         }
 
         th,
         td {
             padding: 10px;
-            text-align: center;
+            border: 1px solid #ddd;
         }
 
         th {
             cursor: pointer;
+            background-color: #f9f9f9;
         }
 
         th:hover {
-            background-color: #ddd;
+            background-color: #eaeaea;
         }
 
         tr:nth-child(even) {
@@ -114,66 +108,33 @@
             background-color: #fff;
         }
 
-        table a:link,
-        table a:visited {
-            color: blue;
+        td:last-child {
+            font-weight: bold;
         }
 
-        .red-style {
-            margin: 0 auto;
-            color: rgb(185, 28, 28);
-            padding: 0.3rem;
-            width: 3rem;
-            background-color: rgb(254, 226, 226);
-            border-radius: 0.5rem;
-            text-align: center;
-
+        td[style*="background-color"] {
+            border-radius: 5px;
+            padding: 5px;
         }
 
-        .light-green-style {
-            margin: 0 auto;
-            color: rgb(22 101 52);
-            padding: 0.3rem;
-            width: 3rem;
-            background-color: rgb(240 253 244);
-            border-radius: 0.5rem;
+        .main-content {
             text-align: center;
-        }
-
-        .dark-green-style {
-            margin: 0 auto;
-            color: rgb(22 101 52);
-            padding: 0.3rem;
-            width: 3rem;
-            background-color: rgb(220 252 231);
-            border-radius: 0.5rem;
-            text-align: center;
-        }
-
-        .blue-style {
-            margin: 0 auto;
-            color: rgb(30 64 175);
-            padding: 0.3rem;
-            width: 3rem;
-            background-color: rgb(191 219 254);
-            border-radius: 0.5rem;
-            text-align: center;
+            padding: 50px 20px;
         }
     </style>
 </head>
 
 <body>
-    <script src="../Javscript Files/teams.js"></script>
+    <script src="../Javscript Files/events.js"></script>
     <div class="header">
         <div class="nav-container">
-
             <!-- Image next to links -->
             <a href="../index.html">
                 <img src="../Statbotics_files/not_statbotic.ico" alt="Logo">
             </a>
             <div class="nav-links">
-                <a href="#">Teams</a>
-                <a href="./events.html">Events</a>
+                <a href="../HTML files/teams.html">Teams</a>
+                <a href="#">Events</a>
                 <a href="#">Matches</a>
                 <a href="#">Misc</a>
             </div>
@@ -182,28 +143,37 @@
             <input type="text" placeholder="Search Teams and Events" style="padding: 5px;">
         </div>
     </div>
+    <div style="margin-left: 8%; margin-top: 1%;"><strong>Match Predictions</strong></div>
+    <div style="margin-left: 8%; margin-top: 1%;">Remember, match predictions are just for fun, you control your own destiny!</div>
     <div class="main-content">
         <div class="table-container">
             <table id="sortable-table">
                 <thead>
                     <tr>
-                        <th onclick="sortTable(0)">Number</th>
-                        <th onclick="sortTable(1)">Name</th>
-                        <th onclick="sortTable(2)">EPA Rank</th>
-                        <th onclick="sortTable(3)">Unitless EPA</th>
-                        <th onclick="sortTable(4)">EPA</th>
-                        <th onclick="sortTable(5)">Auto EPA</th>
-                        <th onclick="sortTable(6)">Teleop EPA</th>
-                        <th onclick="sortTable(7)">Endgame EPA</th>
-                        <th onclick="sortTable(8)">Next Event</th>
-                        <th onclick="sortTable(9)">Record</th>
+                        <th>Match</th>
+                        <th colspan="2">Red Alliance</th>
+                        <th colspan="2">Blue Alliance</th>
+                        <th>Score Diff</th>
+                        <th>Actual Diff</th>
+                        <th>Win Pred</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Team 1</th>
+                        <th>Team 2</th>
+                        <th>Team 1</th>
+                        <th>Team 2</th>
+                        <th>Red(+) Blue(-)</th>
+                        <th>Red(+) Blue(-)</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data is dynamically added -->
+                    <!-- Add more rows dynamically -->
                 </tbody>
             </table>
         </div>
+        <button onclick="getSOS()">Simulate SOS</button>
     </div>
 </body>
 
