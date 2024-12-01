@@ -5,7 +5,7 @@ function sortTable(columnIndex) {
 
     const isNumeric = !isNaN(rows[0].children[columnIndex].innerText);
 
-    rows.sort((rowA, rowB) => {
+    rows.sort((rowB, rowA) => {
         const cellA = rowA.children[columnIndex].innerText;
         const cellB = rowB.children[columnIndex].innerText;
 
@@ -55,6 +55,7 @@ async function fetchJSONData(filePath) {
         console.error("Unable to fetch data:", error);
     }
 }
+
 async function generateRankings() {
     let teamListData = await fetchTeamList()
     var teamData = [];
