@@ -108,3 +108,19 @@ function matchesInsightData(eventInfo) {
     }
     return teamData;
 }
+
+function calculateStandardDeviation(numbers) {
+    if (numbers.length === 0) return 0; // Handle empty array
+    
+    // Step 1: Calculate the mean
+    const mean = numbers.reduce((sum, num) => sum + num, 0) / numbers.length;
+
+    // Step 2: Calculate squared differences from the mean
+    const squaredDiffs = numbers.map(num => Math.pow(num - mean, 2));
+
+    // Step 3: Find the mean of the squared differences
+    const variance = squaredDiffs.reduce((sum, diff) => sum + diff, 0) / numbers.length;
+
+    // Step 4: Take the square root of the variance
+    return Math.sqrt(variance);
+}
