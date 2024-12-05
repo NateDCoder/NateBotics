@@ -27,20 +27,8 @@ function sortTable(columnIndex) {
     tbody.innerHTML = "";
     rows.forEach(row => tbody.appendChild(row));
 }
-async function fetchData1() {
-    const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/data1');
-    const data = await response.json();
-    return data;
-}
-
 async function fetchTeamList() {
     const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/Team_List');
-    const data = await response.json();
-    return data;
-}
-
-async function fetchData2() {
-    const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/data2');
     const data = await response.json();
     return data;
 }
@@ -100,7 +88,7 @@ function populateTable(data) {
                 // Check if this is the second row
                 if (index === 1) {  // 0-based index, so 1 is the second row
                     const link = document.createElement("a");
-                    link.href = "./team htmls/" + value + ".html";  // Set the desired link
+                    link.href = "./team htmls/" + team["number"] + ".html";  // Set the desired link
                     link.textContent = value;  // Add the value as the link text
                     cell.appendChild(link);
                 } else if (4 <= index && index <= 7) {

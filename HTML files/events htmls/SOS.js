@@ -280,7 +280,7 @@ function addSOSDataToTable(data) {
                 // Check if this is the second row
                 if (index === 1) {  // 0-based index, so 1 is the second row
                     const link = document.createElement("a");
-                    link.href = "./team htmls/" + value + ".html";  // Set the desired link
+                    link.href = "../team htmls/" + team["number"] + ".html";  // Set the desired link
                     link.textContent = value;  // Add the value as the link text
                     cell.appendChild(link);
                 } else if (3 <= index && index <= 3) {
