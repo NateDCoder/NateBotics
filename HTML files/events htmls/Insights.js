@@ -37,19 +37,7 @@ function addInsightDataToTable(data) {
                             break;
                     }
                     let percentile = 1 - team[rank] / totalAmountOfTeams;
-
-                    if (percentile < .25) {
-                        div.className = "red-style"
-                    } else if (percentile < .75) {
-                        div.className = "white-style"
-                    } else if (percentile < .9) {
-                        div.className = "light-green-style"
-                    } else if (percentile < .99) {
-                        div.className = "dark-green-style"
-                    } else {
-                        div.className = "blue-style"
-
-                    }
+                    div.className = getColorClassStyle(percentile);
                     div.textContent = value
                     cell.appendChild(div)
                 }

@@ -96,9 +96,6 @@ async function getSOSData(eventInfo) {
         // If Wins are equal, sort by Average EPA (descending)
         return b["Average Auton"] - a["Average Auton"];
     });
-    for (let i = 0; i < teamsArray.length; i++) {
-        let team = teamsArray[i];
-    }
     let teamToRank = {};
     teamsArray.forEach((team, index) => {
         teamToRank[team["teamNumber"]] = index + 1
@@ -288,35 +285,11 @@ function addSOSDataToTable(data) {
                     cell.appendChild(link);
                 } else if (3 <= index && index <= 3) {
                     const div = document.createElement("div");
-                    let rank;
-                    switch (index) {
-                        case 3:
-                            rank = "EPA Rank"
-                            break;
-                        case 4:
-                            rank = "Auto EPA Rank"
-                            break;
-                        case 5:
-                            rank = "TeleOp EPA Rank"
-                            break;
-                        case 6:
-                            rank = "Endgame EPA Rank"
-                            break;
-                    }
+                    let rank = "EPA Rank";
                     let percentile = 1 - team[rank] / totalAmountOfTeams;
 
-                    if (percentile < .25) {
-                        div.className = "red-style"
-                    } else if (percentile < .75) {
-                        div.className = "white-style"
-                    } else if (percentile < .9) {
-                        div.className = "light-green-style"
-                    } else if (percentile < .99) {
-                        div.className = "dark-green-style"
-                    } else {
-                        div.className = "blue-style"
+                    div.className = getColorClassStyle(percentile);
 
-                    }
                     div.textContent = value
                     cell.appendChild(div)
                 }
@@ -345,20 +318,4 @@ function addSOSDataToTable(data) {
     }
     sortTable(0, "sos-table")
     sortTable(0, "sos-table")
-}
-
-function calculateStandardDeviation(numbers) {
-    if (numbers.length === 0) return 0; // Handle empty array
-
-    // Step 1: Calculate the mean
-    const mean = numbers.reduce((sum, num) => sum + num, 0) / numbers.length;
-
-    // Step 2: Calculate squared differences from the mean
-    const squaredDiffs = numbers.map(num => Math.pow(num - mean, 2));
-
-    // Step 3: Find the mean of the squared differences
-    const variance = squaredDiffs.reduce((sum, diff) => sum + diff, 0) / numbers.length;
-
-    // Step 4: Take the square root of the variance
-    return Math.sqrt(variance);
 }

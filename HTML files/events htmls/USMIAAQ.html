@@ -239,7 +239,43 @@
                 </table>
             </div>
         </div>
-        <div id="qual-matches" class="tab-content">Content for Qual Matches</div>
+        <div id="qual-matches" class="tab-content">
+            <div style="text-align: left; margin-left: 13%; margin-top: 1%;"><strong>Match Predictions</strong></div>
+            <div style="text-align: left; margin-left: 12%; margin-top: 1%;">Remember, match predictions are just for fun, you control your
+                own destiny!</div>
+            <div class="main-content">
+                <div class="table-container">
+                    <table id="qual-matches-table">
+                        <thead>
+                            <tr>
+                                <th>Match</th>
+                                <th colspan="2">Red Alliance</th>
+                                <th colspan="2">Blue Alliance</th>
+                                <th colspan="2">Scores</th>
+                                <th colspan="2">Score Preds</th>
+                                <th colspan="2">Win Pred</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th>Team 1</th>
+                                <th>Team 2</th>
+                                <th>Team 1</th>
+                                <th>Team 2</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>   
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Add more rows dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div id="alliances" class="tab-content">Content for Alliances</div>
         <div id="elim-matches" class="tab-content">Content for Elim Matches</div>
         <div id="simulation" class="tab-content">Content for Simulation</div>
@@ -265,7 +301,9 @@
                 </table>
             </div>
         </div>
+        <script src="./helperFunctions.js"></script>
         <script src="./tabCode.js"></script>
+        <script src="./qualMatchs.js"></script>
         <script src="./SOS.js"></script>
         <script src="./Insights.js"></script>
         <script>
