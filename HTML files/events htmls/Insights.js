@@ -109,18 +109,49 @@ function matchesInsightData(eventInfo) {
     return teamData;
 }
 
-function calculateStandardDeviation(numbers) {
-    if (numbers.length === 0) return 0; // Handle empty array
-    
-    // Step 1: Calculate the mean
-    const mean = numbers.reduce((sum, num) => sum + num, 0) / numbers.length;
+async function populateInsightTable() {
+    var eventInfo = await getEventInfo();
+    const insightTable = document.getElementById("insights-table");
+    if (!eventInfo["hasTeamList"]) {
+        insightTable.innerText = "No Event Info"
+    }
+    if (!eventInfo["hasScheduleist"]) {
+        insightTable.innerHTML = `<thead>
+            <tr>
+                <th onclick="sortTable(0, 'insights-table')">Number</th>
+                <th onclick="sortTable(1, 'insights-table')">Name</th>
+                <th onclick="sortTable(2, 'insights-table')">EPA Rank</th>
+                <th onclick="sortTable(3, 'insights-table')">EPA</th>
+                <th onclick="sortTable(4, 'insights-table')">Auto EPA</th>
+                <th onclick="sortTable(5, 'insights-table')">Teleop EPA</th>
+                <th onclick="sortTable(6, 'insights-table')">Endgame EPA</th>
+                <th onclick="sortTable(7, 'insights-table')">Next Event</th>
+                <th onclick="sortTable(8, 'insights-table')">Record</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data is dynamically added -->
+        </tbody>`
+        addInsightDataToTable(noMatchesInsightData(eventInfo));
+    } else {
+        insightTable.innerHTML = `<thead>
+            <tr>
+                <th onclick="sortTable(0, 'insights-table')">Number</th>
+                <th onclick="sortTable(1, 'insights-table')">Name</th>
+                <th onclick="sortTable(2, 'insights-table')">Rank</th>
+                <th onclick="sortTable(3, 'insights-table')">EPA</th>
+                <th onclick="sortTable(4, 'insights-table')">Auto EPA</th>
+                <th onclick="sortTable(5, 'insights-table')">Teleop EPA</th>
+                <th onclick="sortTable(6, 'insights-table')">Endgame EPA</th>
+                <th onclick="sortTable(7, 'insights-table')">Next Event</th>
+                <th onclick="sortTable(8, 'insights-table')">Record</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data is dynamically added -->
+        </tbody>`
+        addInsightDataToTable(matchesInsightData(eventInfo));
+    }
 
-    // Step 2: Calculate squared differences from the mean
-    const squaredDiffs = numbers.map(num => Math.pow(num - mean, 2));
-
-    // Step 3: Find the mean of the squared differences
-    const variance = squaredDiffs.reduce((sum, diff) => sum + diff, 0) / numbers.length;
-
-    // Step 4: Take the square root of the variance
-    return Math.sqrt(variance);
 }
+
