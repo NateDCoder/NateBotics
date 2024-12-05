@@ -308,12 +308,14 @@ Object.entries(eventNames).forEach(([code, name]) => {
         </div>
         <script src="./helperFunctions.js"></script>
         <script src="./tabCode.js"></script>
+        <script src="./qualMatchs.js"></script>
         <script src="./SOS.js"></script>
         <script src="./Insights.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 populateInsightTable();
                 populateSOS();
+                fetchAndPopulateQualMatches();
 
             });
             async function getEventInfo() {

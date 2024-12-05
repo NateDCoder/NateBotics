@@ -1,15 +1,16 @@
-var week1STD = 20.730805684966178;
-async function populateTable() {
+async function populateQualMatches() {
     const tableBody = document.querySelector("#qual-matches-table tbody");
     var eventInfo = await getEventInfo();
     console.log(eventInfo)
     // Clear existing rows (if any)
     tableBody.innerHTML = "";
     var schedule = eventInfo.schedule;
+    var predictions = eventInfo.Predictions
     matchData = [];
-    console.log(schedule.length)
+    let correctGuess = 0;
 
     for (let i = 0; i < schedule.length; i++) {
+        let prediction = predictions[i]
         var red1;
         var red2;
         var blue1;
@@ -46,6 +47,7 @@ async function populateTable() {
                 winner = "Blue"
             }
         }
+
         matchData.push({
             "Match Number": "Qual " + (i + 1),
             "Red1": red1,
@@ -54,13 +56,25 @@ async function populateTable() {
             "Blue2": blue2,
             "Red Score": redScore,
             "Blue Score": blueScore,
-            "Red Pred Score": 0,
-            "Blue Pred Score": 0,
-            "Predicted Team Win": "Blue",
-            "win percentage": 50 + "%",
-            "winner": winner
+            "Red Pred Score": prediction["Red Pred Score"],
+            "Blue Pred Score": prediction["Blue Pred Score"],
+            "Predicted Team Win": prediction["Predicted Team Win"],
+            "Win Percentage": Math.floor(100 * prediction["Win Percentage"]) + "%",
+            "winner": winner,
+            "Guessed Right": (prediction["Predicted Team Win"] == winner)
         })
+        if (prediction["Predicted Team Win"] == winner) {
+            correctGuess++;
+        }
+
     }
+    let divContainer = document.getElementById("qual-matches")
+    let winPredictionPercentagesDiv = document.createElement("div")
+    winPredictionPercentagesDiv.innerHTML = "<strong>Accuracy: "+(Math.round(1000 * (correctGuess/schedule.length))/10)+"%</strong>"
+    winPredictionPercentagesDiv.style.textAlign = "left"
+    winPredictionPercentagesDiv.style.marginLeft = "12%"
+    winPredictionPercentagesDiv.style.marginTop = "1%"
+    divContainer.insertBefore(winPredictionPercentagesDiv, divContainer.children[2])
     // Loop through the data and create rows
     matchData.forEach(match => {
         const row = document.createElement("tr");
@@ -103,6 +117,12 @@ async function populateTable() {
                 } else if (index === 8) {
                     cell.style.backgroundColor = "rgb(238, 238, 255)";
                     cell.style.width = "9%"
+                } else if (index === 10) {
+                    if (match["Guessed Right"]) {
+                        cell.style.backgroundColor = "rgb(134, 207, 163)";
+                    }else {
+                        cell.style.backgroundColor = "rgb(247, 127, 132)";
+                    }
                 }
 
                 // Set the text content of the cell
@@ -118,19 +138,15 @@ async function populateTable() {
     });
     return matchData
 }
-async function fetchAndPopulateTable() {
+async function fetchAndPopulateQualMatches() {
 
     try {
-        populateTable(); // Populate the table
+        populateQualMatches(); // Populate the table
     } catch (error) {
         console.error("Error fetching the JSON data:", error);
     }
 }
 
-
-document.addEventListener("DOMContentLoaded", () => {
-    fetchAndPopulateTable();
-});
 
 async function getSOS() {
     const data = await generateRankings();
