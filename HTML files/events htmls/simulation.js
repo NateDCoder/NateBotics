@@ -162,8 +162,9 @@ async function getSimulationData(eventInfo, teamToEPA) {
     var teamData = [];
     let i = 1;
     let otherTeamData = {}
+    console.log()
     for (let team of eventInfo.preEloTeamList) {
-        otherTeamData[team["Number"]] = { "EPA Rank": team["EPA Rank"], "Name": team["Name"], "epa": Math.round(team["EPA"] * 10) / 10 }
+        otherTeamData[team["Number"]] = { "EPA Rank": team["EPA Rank"], "Name": team["Name"], "epa": Math.round(teamToEPA[team["Number"]]["EPA"] * 10) / 10 }
     }
     console.log(schedule, teams, teamToEPA)
     let simulatedRankings = simulateMatches(schedule, teams, teamToEPA);
