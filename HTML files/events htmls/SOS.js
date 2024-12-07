@@ -1,6 +1,6 @@
 async function populateSOS() {
-    let eventInfo = await getEventInfo();
-    addSOSDataToTable(await getSOSData(eventInfo));
+    // let eventInfo = await getEventInfo();
+    //addSOSDataToTable(await getSOSData(eventInfo));
 }
 function getTotalMatchesPerTeam(eventInfo) {
     let teamStorage = {}
@@ -146,122 +146,122 @@ function updateTeamMatchData(matchData, team, redTeams, blueTeams, redScore, blu
             break;
     }
 }
-async function simulateMatches(eventInfo, SOSData, teamToEPA, teamToAuto, teamToRank, STD, matchesPlayed) {
-    let simulationData = {};
-    for (let team of eventInfo.teams) {
-        simulationData[team] = { "EPA Toughness": 0, "Rank Score": 0, "EPA Score": 0, "Composite": 0 }
-    }
-    let schedule = await getSchedule();
-    let listOfTeams = eventInfo.teams;
-    for (let i = 0; i < 1000; i++) {
-        shuffle(listOfTeams);
-        let simulatedSOSData = {};
-        for (let team of listOfTeams) {
-            simulatedSOSData[team] = { "Matches Played": 0, "Wins": 0, "Average EPA": 0, "Average Auton": 0, "EPA Difference": 0 }
-        }
-        for (let teamsInMatch of schedule) {
-            let red1 = listOfTeams[teamsInMatch[0] - 1]
-            let red2 = listOfTeams[teamsInMatch[1] - 1]
+// async function simulateMatches(eventInfo, SOSData, teamToEPA, teamToAuto, teamToRank, STD, matchesPlayed) {
+//     let simulationData = {};
+//     for (let team of eventInfo.teams) {
+//         simulationData[team] = { "EPA Toughness": 0, "Rank Score": 0, "EPA Score": 0, "Composite": 0 }
+//     }
+//     let schedule = await getSchedule();
+//     let listOfTeams = eventInfo.teams;
+//     for (let i = 0; i < 1000; i++) {
+//         shuffle(listOfTeams);
+//         let simulatedSOSData = {};
+//         for (let team of listOfTeams) {
+//             simulatedSOSData[team] = { "Matches Played": 0, "Wins": 0, "Average EPA": 0, "Average Auton": 0, "EPA Difference": 0 }
+//         }
+//         for (let teamsInMatch of schedule) {
+//             let red1 = listOfTeams[teamsInMatch[0] - 1]
+//             let red2 = listOfTeams[teamsInMatch[1] - 1]
 
-            let blue1 = listOfTeams[teamsInMatch[2] - 1]
-            let blue2 = listOfTeams[teamsInMatch[3] - 1]
+//             let blue1 = listOfTeams[teamsInMatch[2] - 1]
+//             let blue2 = listOfTeams[teamsInMatch[3] - 1]
 
-            simulatedSOSData[red1]["Matches Played"]++;
-            simulatedSOSData[red2]["Matches Played"]++;
+//             simulatedSOSData[red1]["Matches Played"]++;
+//             simulatedSOSData[red2]["Matches Played"]++;
 
-            simulatedSOSData[blue1]["Matches Played"]++;
-            simulatedSOSData[blue2]["Matches Played"]++;
+//             simulatedSOSData[blue1]["Matches Played"]++;
+//             simulatedSOSData[blue2]["Matches Played"]++;
 
-            let redTeamEPA = teamToEPA[red1] + teamToEPA[red2]
-            let blueTeamEPA = teamToEPA[blue1] + teamToEPA[blue2]
+//             let redTeamEPA = teamToEPA[red1] + teamToEPA[red2]
+//             let blueTeamEPA = teamToEPA[blue1] + teamToEPA[blue2]
 
-            let winPercentage = 1 / (1 + Math.pow(10, (blueTeamEPA - redTeamEPA) / STD))
-            if (Math.random() < winPercentage) {
-                if (simulatedSOSData[red1]["Matches Played"] <= matchesPlayed) {
-                    simulatedSOSData[red1]["Wins"]++;
-                }
-                if (simulatedSOSData[red2]["Matches Played"] <= matchesPlayed) {
-                    simulatedSOSData[red2]["Wins"]++;
-                }
-            } else {
-                if (simulatedSOSData[blue1]["Matches Played"] <= matchesPlayed) {
-                    simulatedSOSData[blue1]["Wins"]++;
-                }
-                if (simulatedSOSData[blue2]["Matches Played"] <= matchesPlayed) {
-                    simulatedSOSData[blue2]["Wins"]++;
-                }
-            }
+//             let winPercentage = 1 / (1 + Math.pow(10, (blueTeamEPA - redTeamEPA) / STD))
+//             if (Math.random() < winPercentage) {
+//                 if (simulatedSOSData[red1]["Matches Played"] <= matchesPlayed) {
+//                     simulatedSOSData[red1]["Wins"]++;
+//                 }
+//                 if (simulatedSOSData[red2]["Matches Played"] <= matchesPlayed) {
+//                     simulatedSOSData[red2]["Wins"]++;
+//                 }
+//             } else {
+//                 if (simulatedSOSData[blue1]["Matches Played"] <= matchesPlayed) {
+//                     simulatedSOSData[blue1]["Wins"]++;
+//                 }
+//                 if (simulatedSOSData[blue2]["Matches Played"] <= matchesPlayed) {
+//                     simulatedSOSData[blue2]["Wins"]++;
+//                 }
+//             }
 
-            simulatedSOSData[red1]["Average EPA"] += redTeamEPA;
-            simulatedSOSData[red2]["Average EPA"] += redTeamEPA;
+//             simulatedSOSData[red1]["Average EPA"] += redTeamEPA;
+//             simulatedSOSData[red2]["Average EPA"] += redTeamEPA;
 
-            simulatedSOSData[blue1]["Average EPA"] += blueTeamEPA;
-            simulatedSOSData[blue2]["Average EPA"] += blueTeamEPA;
+//             simulatedSOSData[blue1]["Average EPA"] += blueTeamEPA;
+//             simulatedSOSData[blue2]["Average EPA"] += blueTeamEPA;
 
-            simulatedSOSData[red1]["EPA Difference"] += redTeamEPA - blueTeamEPA
-            simulatedSOSData[red2]["EPA Difference"] += redTeamEPA - blueTeamEPA
+//             simulatedSOSData[red1]["EPA Difference"] += redTeamEPA - blueTeamEPA
+//             simulatedSOSData[red2]["EPA Difference"] += redTeamEPA - blueTeamEPA
 
-            simulatedSOSData[blue1]["EPA Difference"] += blueTeamEPA - redTeamEPA
-            simulatedSOSData[blue2]["EPA Difference"] += blueTeamEPA - redTeamEPA
+//             simulatedSOSData[blue1]["EPA Difference"] += blueTeamEPA - redTeamEPA
+//             simulatedSOSData[blue2]["EPA Difference"] += blueTeamEPA - redTeamEPA
 
-            let redTeamAuto = teamToAuto[red1] + teamToAuto[red2]
-            let blueTeamAuto = teamToAuto[blue1] + teamToAuto[blue2]
+//             let redTeamAuto = teamToAuto[red1] + teamToAuto[red2]
+//             let blueTeamAuto = teamToAuto[blue1] + teamToAuto[blue2]
 
-            simulatedSOSData[red1]["Average Auton"] += redTeamAuto
-            simulatedSOSData[red2]["Average Auton"] += redTeamAuto
+//             simulatedSOSData[red1]["Average Auton"] += redTeamAuto
+//             simulatedSOSData[red2]["Average Auton"] += redTeamAuto
 
-            simulatedSOSData[blue1]["Average Auton"] += blueTeamAuto
-            simulatedSOSData[blue2]["Average Auton"] += blueTeamAuto
+//             simulatedSOSData[blue1]["Average Auton"] += blueTeamAuto
+//             simulatedSOSData[blue2]["Average Auton"] += blueTeamAuto
 
-        }
-        eventInfo.afterEloTeamList.forEach(team => {
-            simulatedSOSData[team["Number"]]["Average Auton"] /= simulatedSOSData[team["Number"]]["Matches Played"]
-            simulatedSOSData[team["Number"]]["Average EPA"] /= simulatedSOSData[team["Number"]]["Matches Played"]
-            simulatedSOSData[team["Number"]]["EPA Difference"] /= simulatedSOSData[team["Number"]]["Matches Played"]
-        })
-        const teamsArray = Object.entries(simulatedSOSData).map(([teamNumber, stats]) => ({
-            teamNumber: parseInt(teamNumber),
-            ...stats
-        }));
-        // Sort array by Wins first, then Average EPA
-        teamsArray.sort((a, b) => {
-            // Sort by Wins (descending)
-            if (b.Wins !== a.Wins) {
-                return b.Wins - a.Wins;
-            }
-            // If Wins are equal, sort by Average EPA (descending)
-            return b["Average Auton"] - a["Average Auton"];
-        });
-        for (let i = 0; i < teamsArray.length; i++) {
-            let team = teamsArray[i];
-        }
-        teamsArray.forEach((team, index) => {
-            simulatedSOSData[team["teamNumber"]]["Rank"] = index + 1
-        })
-        for (let team of listOfTeams) {
-            if (SOSData[team]["EPA Difference"] < simulatedSOSData[team]["EPA Difference"]) {
-                simulationData[team]["EPA Toughness"]++;
-            }
-            if (teamToRank[team] > simulatedSOSData[team]["Rank"]) {
-                simulationData[team]["Rank Score"]++;
-            }else if (teamToRank[team] == simulatedSOSData[team]["Rank"]) {
-                simulationData[team]["Rank Score"]+=0.5;
-            }
-            if (SOSData[team]["Average EPA"] < simulatedSOSData[team]["Average EPA"]) {
-                simulationData[team]["EPA Score"]++;
-            }
-        }
+//         }
+//         eventInfo.afterEloTeamList.forEach(team => {
+//             simulatedSOSData[team["Number"]]["Average Auton"] /= simulatedSOSData[team["Number"]]["Matches Played"]
+//             simulatedSOSData[team["Number"]]["Average EPA"] /= simulatedSOSData[team["Number"]]["Matches Played"]
+//             simulatedSOSData[team["Number"]]["EPA Difference"] /= simulatedSOSData[team["Number"]]["Matches Played"]
+//         })
+//         const teamsArray = Object.entries(simulatedSOSData).map(([teamNumber, stats]) => ({
+//             teamNumber: parseInt(teamNumber),
+//             ...stats
+//         }));
+//         // Sort array by Wins first, then Average EPA
+//         teamsArray.sort((a, b) => {
+//             // Sort by Wins (descending)
+//             if (b.Wins !== a.Wins) {
+//                 return b.Wins - a.Wins;
+//             }
+//             // If Wins are equal, sort by Average EPA (descending)
+//             return b["Average Auton"] - a["Average Auton"];
+//         });
+//         for (let i = 0; i < teamsArray.length; i++) {
+//             let team = teamsArray[i];
+//         }
+//         teamsArray.forEach((team, index) => {
+//             simulatedSOSData[team["teamNumber"]]["Rank"] = index + 1
+//         })
+//         for (let team of listOfTeams) {
+//             if (SOSData[team]["EPA Difference"] < simulatedSOSData[team]["EPA Difference"]) {
+//                 simulationData[team]["EPA Toughness"]++;
+//             }
+//             if (teamToRank[team] > simulatedSOSData[team]["Rank"]) {
+//                 simulationData[team]["Rank Score"]++;
+//             }else if (teamToRank[team] == simulatedSOSData[team]["Rank"]) {
+//                 simulationData[team]["Rank Score"]+=0.5;
+//             }
+//             if (SOSData[team]["Average EPA"] < simulatedSOSData[team]["Average EPA"]) {
+//                 simulationData[team]["EPA Score"]++;
+//             }
+//         }
 
-    }
-    for (let team of listOfTeams) {
-        simulationData[team]["EPA Toughness"] /= 1000;
-        simulationData[team]["Rank Score"] /= 1000;
-        simulationData[team]["EPA Score"] /= 1000;
-        simulationData[team]["Composite"] = Math.round(1000 * ((simulationData[team]["EPA Toughness"] + simulationData[team]["Rank Score"] + simulationData[team]["EPA Score"]) / 3)) / 1000;
+//     }
+//     for (let team of listOfTeams) {
+//         simulationData[team]["EPA Toughness"] /= 1000;
+//         simulationData[team]["Rank Score"] /= 1000;
+//         simulationData[team]["EPA Score"] /= 1000;
+//         simulationData[team]["Composite"] = Math.round(1000 * ((simulationData[team]["EPA Toughness"] + simulationData[team]["Rank Score"] + simulationData[team]["EPA Score"]) / 3)) / 1000;
 
-    }
-    return simulationData
-}
+//     }
+//     return simulationData
+// }
 function addSOSDataToTable(data) {
     const tableBody = document.querySelector("#sos-table tbody");
 

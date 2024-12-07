@@ -18,15 +18,19 @@
 async function fetchAndPopulateSimulation() {
     let eventInfo = await getEventInfo();
     let teamToEPA = await fetchTeamToEPA();
-    let numberToName = await fetchJSONData("../../data/Number To Team.json");
-    populateSimulation(getSimulationData(eventInfo, teamToEPA, numberToName));
+
+    let simulationData = await getSimulationData(eventInfo, teamToEPA)
+    console.log(simulationData)
+    populateSimulation(simulationData);
 }
 function simulateMatches(schedule, teams, teamToEPA) {
+
     let teamPredictedRanks = {}
     for (let team of teams) {
         teamPredictedRanks[team] = { "Average Rank": 0, "List of Ranks": [] }
     }
     for (let i = 0; i < 1000; i++) {
+        console.log(i)
         let matchSimulation = {}
         for (let team of teams) {
             matchSimulation[team] = { "Wins": 0, "Auto EPA": 0 }
@@ -42,13 +46,13 @@ function simulateMatches(schedule, teams, teamToEPA) {
                         red1 = match.teams[j].teamNumber;
                         break;
                     case "Red2":
-                        red2 = schedule[i].teams[j].teamNumber;
+                        red2 = match.teams[j].teamNumber;
                         break;
                     case "Blue1":
-                        blue1 = schedule[i].teams[j].teamNumber;
+                        blue1 = match.teams[j].teamNumber;
                         break;
                     case "Blue2":
-                        blue2 = schedule[i].teams[j].teamNumber;
+                        blue2 = match.teams[j].teamNumber;
                         break;
                     default:
                         // Optional: Handle any unexpected station values here
@@ -63,7 +67,7 @@ function simulateMatches(schedule, teams, teamToEPA) {
             let redAuton;
 
             let redWinPercentage = null;
-            if (scoreBlueFinal !== null) {
+            if (match.scoreBlueFinal !== null) {
                 blueScore = match.scoreBlueFinal;
                 redScore = match.scoreRedFinal;
 
@@ -76,19 +80,15 @@ function simulateMatches(schedule, teams, teamToEPA) {
             }
             if (redWinPercentage !== null) {
                 if (Math.random() < redWinPercentage) {
-                    if (matchSimulation[red1]["Matches Played"] <= matchesPlayed) {
-                        matchSimulation[red1]["Wins"]++;
-                    }
-                    if (matchSimulation[red2]["Matches Played"] <= matchesPlayed) {
-                        matchSimulation[red2]["Wins"]++;
-                    }
+                    matchSimulation[red1]["Wins"]++;
+
+                    matchSimulation[red2]["Wins"]++;
+
                 } else {
-                    if (matchSimulation[blue1]["Matches Played"] <= matchesPlayed) {
-                        matchSimulation[blue1]["Wins"]++;
-                    }
-                    if (matchSimulation[blue2]["Matches Played"] <= matchesPlayed) {
-                        matchSimulation[blue2]["Wins"]++;
-                    }
+                    matchSimulation[blue1]["Wins"]++;
+
+                    matchSimulation[blue2]["Wins"]++;
+
                 }
 
             } else {
@@ -106,6 +106,7 @@ function simulateMatches(schedule, teams, teamToEPA) {
             matchSimulation[red1]["Auto EPA"] += redAuton;
             matchSimulation[red2]["Auto EPA"] += redAuton;
         }
+
         const teamsArray = Object.entries(matchSimulation).map(([teamNumber, stats]) => ({
             teamNumber: parseInt(teamNumber),
             ...stats
@@ -119,18 +120,19 @@ function simulateMatches(schedule, teams, teamToEPA) {
             // If Wins are equal, sort by Average EPA (descending)
             return b["Auto EPA"] - a["Auto EPA"];
         });
+        console.log(teamsArray)
         teamsArray.forEach((team, index) => {
             teamPredictedRanks[team["teamNumber"]]["Average Rank"] += index + 1
             teamPredictedRanks[team["teamNumber"]]["List of Ranks"].push(index + 1);
         })
     }
     for (let team of teams) {
-        teamPredictedRanks[team["Number"]]["List of Ranks"].sort(
+        teamPredictedRanks[team]["List of Ranks"].sort(
             (a, b) => {
                 // Sort by Rank (ascending)
                 return a - b;
             })
-        teamPredictedRanks[team["Number"]]["Average Rank"] /= 1000;
+        teamPredictedRanks[team]["Average Rank"] /= 1000;
     }
     const predictedRanks = Object.entries(teamPredictedRanks).map(([teamNumber, stats]) => ({
         Number: parseInt(teamNumber),
@@ -139,7 +141,7 @@ function simulateMatches(schedule, teams, teamToEPA) {
     predictedRanks.sort(
         (a, b) => {
             // Sort by Rank (ascending)
-            return a - b;
+            return a["Average Rank"] - b["Average Rank"];
         })
     return predictedRanks
 
@@ -151,18 +153,21 @@ async function fetchTeamToEPA() {
     for (let team of data) {
         teamToEPA[team["Number"]] = { "Auto EPA": team["Auto EPA"], "EPA": team["EPA"], "Elo": Math.round(team["Unitless EPA"]) }
     }
-    return data;
+    return teamToEPA;
 }
-function getSimulationData(eventInfo, teamToEPA, numberToName) {
+async function getSimulationData(eventInfo, teamToEPA) {
     let schedule = eventInfo.schedule;
+    console.log(eventInfo)
     let teams = eventInfo.teams;
     var teamData = [];
     let i = 1;
     let otherTeamData = {}
     for (let team of eventInfo.preEloTeamList) {
-        otherTeamData[team["Number"]] = {"EPA Rank": team["EPA Rank"], "Name": team["Name"], "epa": Math.round(team["EPA"] * 10) / 10}
+        otherTeamData[team["Number"]] = { "EPA Rank": team["EPA Rank"], "Name": team["Name"], "epa": Math.round(team["EPA"] * 10) / 10 }
     }
-    let simulatedRankings = simulateMatches(schedule, teams, teamToEPA, numberToName);
+    console.log(schedule, teams, teamToEPA)
+    let simulatedRankings = simulateMatches(schedule, teams, teamToEPA);
+    console.log(simulatedRankings)
     for (let team of simulatedRankings) {
         teamData.push({
             "Predicted Rank": i,
@@ -170,17 +175,19 @@ function getSimulationData(eventInfo, teamToEPA, numberToName) {
             "Name": otherTeamData[team["Number"]]["Name"],
             "epa": otherTeamData[team["Number"]]["epa"],
             "Mean Rank": team["Average Rank"],
-            "5% Rank": team["Average Rank"]["List of Ranks"][50],
-            "Median Rank": team["Average Rank"]["List of Ranks"][500],
-            "95% Rank": team["Average Rank"]["List of Ranks"][950],
+            "5% Rank": team["List of Ranks"][50],
+            "Median Rank": team["List of Ranks"][500],
+            "95% Rank": team["List of Ranks"][950],
             "EPA Rank": otherTeamData[team["Number"]]["EPA Rank"]
         })
         i++;
     }
+    console.log(teamData)
     return teamData
 }
 
 function populateSimulation(data) {
+    console.log(data)
     const tableBody = document.querySelector("#simulation-table tbody");
 
     // Clear existing rows (if any)
