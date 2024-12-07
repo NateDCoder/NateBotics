@@ -8,7 +8,7 @@ async function populateQualMatches() {
     var predictions = eventInfo.Predictions
     matchData = [];
     let correctGuess = 0;
-
+    let matchesPlayed = 1000;
     for (let i = 0; i < schedule.length; i++) {
         let prediction = predictions[i]
         var red1;
@@ -46,7 +46,10 @@ async function populateQualMatches() {
             } else if (blueScore > redScore) {
                 winner = "Blue"
             }
+        } else {
+            matchesPlayed = Math.min(i+1, matchesPlayed)
         }
+
 
         matchData.push({
             "Match Number": "Qual " + (i + 1),
@@ -70,7 +73,7 @@ async function populateQualMatches() {
     }
     let divContainer = document.getElementById("qual-matches")
     let winPredictionPercentagesDiv = document.createElement("div")
-    winPredictionPercentagesDiv.innerHTML = "<strong>Accuracy: "+(Math.round(1000 * (correctGuess/schedule.length))/10)+"%</strong>"
+    winPredictionPercentagesDiv.innerHTML = "<strong>Accuracy: "+(Math.round(1000 * (correctGuess/matchesPlayed))/10)+"%</strong>"
     winPredictionPercentagesDiv.style.textAlign = "left"
     winPredictionPercentagesDiv.style.marginLeft = "12%"
     winPredictionPercentagesDiv.style.marginTop = "1%"
