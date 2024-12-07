@@ -199,6 +199,69 @@
             border-radius: 0.5rem;
             text-align: center;
         }
+
+        .slider-container {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #slider-label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 24px;
+        }
+
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: transparent;
+            outline: none;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgb(236, 236, 236);
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: blue;
+            border-radius: 50%;
+            position: relative;
+            z-index: 3;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: blue;
+            border: none;
+            border-radius: 50%;
+            position: relative;
+            z-index: 3;
+            cursor: pointer;
+        }
+
+        .slider::-ms-thumb {
+            width: 16px;
+            height: 16px;
+            background: purple;
+            border-radius: 50%;
+            position: relative;
+            z-index: 3;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -241,7 +304,8 @@
         </div>
         <div id="qual-matches" class="tab-content">
             <div style="text-align: left; margin-left: 13%; margin-top: 1%;"><strong>Match Predictions</strong></div>
-            <div style="text-align: left; margin-left: 12%; margin-top: 1%;">Remember, match predictions are just for fun, you control your
+            <div style="text-align: left; margin-left: 12%; margin-top: 1%;">Remember, match predictions are just for
+                fun, you control your
                 own destiny!</div>
             <div class="main-content">
                 <div class="table-container">
@@ -264,7 +328,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>   
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -278,7 +342,35 @@
         </div>
         <div id="alliances" class="tab-content">Content for Alliances</div>
         <div id="elim-matches" class="tab-content">Content for Elim Matches</div>
-        <div id="simulation" class="tab-content">Content for Simulation</div>
+        <div id="simulation" class="tab-content">
+            <div class="slider-container">
+                <p id="slider-label">Simulate from: <strong>Before Schedule Release</strong></p>
+                <div class="slider-wrapper">
+                    <input id="slider" class="slider" type="range" min="0" max="5" value="0" step="1">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="table-title">Simulation</div>
+                <table id="simulation-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0, 'simulation-table')">Predicted Rank</th>
+                            <th onclick="sortTable(1, 'simulation-table')">Number</th>
+                            <th onclick="sortTable(2, 'simulation-table')">Team</th>
+                            <th onclick="sortTable(3, 'simulation-table')">EPA</th>
+                            <th onclick="sortTable(4, 'simulation-table')">Mean Rank</th>
+                            <th onclick="sortTable(5, 'simulation-table')">5% Rank</th>
+                            <th onclick="sortTable(6, 'simulation-table')">Median Rank</th>
+                            <th onclick="sortTable(7, 'simulation-table')">95% Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data is dynamically added -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div id="sos" class="tab-content">
             <div class="table-container">
                 <div class="table-title">Strength of Schedule</div>
@@ -303,6 +395,7 @@
         </div>
         <script src="./helperFunctions.js"></script>
         <script src="./tabCode.js"></script>
+        <script src="./simulation.js"></script>
         <script src="./qualMatchs.js"></script>
         <script src="./SOS.js"></script>
         <script src="./Insights.js"></script>
@@ -311,6 +404,7 @@
                 populateInsightTable();
                 populateSOS();
                 fetchAndPopulateQualMatches();
+                fetchAndPopulateSimulation();
 
             });
             async function getEventInfo() {
@@ -321,7 +415,7 @@
             async function getSchedule() {
                 let eventInfo = await getEventInfo();
                 let matchesPlayed = getTotalMatchesPerTeam(eventInfo);
-                const response = await fetch("./Schedules/Schedule"+eventInfo.teams.length+"_"+Math.floor(matchesPlayed)+".json");
+                const response = await fetch("./Schedules/Schedule" + eventInfo.teams.length + "_" + Math.floor(matchesPlayed) + ".json");
                 const data = await response.json();
                 return data;
             }
