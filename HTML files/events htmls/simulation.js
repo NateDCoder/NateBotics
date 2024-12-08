@@ -30,7 +30,6 @@ function simulateMatches(schedule, teams, teamToEPA) {
         teamPredictedRanks[team] = { "Average Rank": 0, "List of Ranks": [] }
     }
     for (let i = 0; i < 1000; i++) {
-        console.log(i)
         let matchSimulation = {}
         for (let team of teams) {
             matchSimulation[team] = { "Wins": 0, "Auto EPA": 0 }
@@ -120,7 +119,6 @@ function simulateMatches(schedule, teams, teamToEPA) {
             // If Wins are equal, sort by Average EPA (descending)
             return b["Auto EPA"] - a["Auto EPA"];
         });
-        console.log(teamsArray)
         teamsArray.forEach((team, index) => {
             teamPredictedRanks[team["teamNumber"]]["Average Rank"] += index + 1
             teamPredictedRanks[team["teamNumber"]]["List of Ranks"].push(index + 1);
@@ -150,8 +148,9 @@ async function fetchTeamToEPA() {
     const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/Team_List');
     const data = await response.json();
     let teamToEPA = {};
+    console.log(data)
     for (let team of data) {
-        teamToEPA[team["Number"]] = { "Auto EPA": team["Auto EPA"], "EPA": team["EPA"], "Elo": Math.round(team["Unitless EPA"]) }
+        teamToEPA[team["Number"]] = { "Auto EPA": team["Auto EPA"], "EPA": team["EPA"], "Elo": Math.round(team["Unitless EPA"]), "EPA Rank": team["EPA Rank"] }
     }
     return teamToEPA;
 }
@@ -164,7 +163,7 @@ async function getSimulationData(eventInfo, teamToEPA) {
     let otherTeamData = {}
     console.log()
     for (let team of eventInfo.preEloTeamList) {
-        otherTeamData[team["Number"]] = { "EPA Rank": team["EPA Rank"], "Name": team["Name"], "epa": Math.round(teamToEPA[team["Number"]]["EPA"] * 10) / 10 }
+        otherTeamData[team["Number"]] = { "EPA Rank": teamToEPA[team["Number"]]["EPA Rank"], "Name": team["Name"], "epa": Math.round(teamToEPA[team["Number"]]["EPA"] * 10) / 10 }
     }
     console.log(schedule, teams, teamToEPA)
     let simulatedRankings = simulateMatches(schedule, teams, teamToEPA);
