@@ -94,9 +94,14 @@ function simulateMatches(schedule, teams, teamToEPA) {
                 if (redScore < blueScore) {
                     matchSimulation[blue1]["Wins"]++;
                     matchSimulation[blue2]["Wins"]++;
-                } else {
+                } else if (redScore > blueScore) {
                     matchSimulation[red1]["Wins"]++;
                     matchSimulation[red2]["Wins"]++;
+                } else {
+                    matchSimulation[blue1]["Wins"]+=0.5;
+                    matchSimulation[blue2]["Wins"]+=0.5;
+                    matchSimulation[red1]["Wins"]+=0.5;
+                    matchSimulation[red2]["Wins"]+=0.5;
                 }
             }
             matchSimulation[blue1]["Auto EPA"] += blueAuton;
