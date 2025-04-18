@@ -9,7 +9,7 @@ Object.entries(eventNames).forEach(([code, name]) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../../Statbotics_files/not_statbotic.ico">
+    <link rel="icon" type="image/x-icon" href="../../Statbotics_files/NateBotics.ico">
     <title>Totally Not Statbotics</title>
     <style>
         body {
@@ -212,7 +212,7 @@ Object.entries(eventNames).forEach(([code, name]) => {
         <div class="nav-container">
             <!-- Image next to links -->
             <a href="../../index.html">
-                <img src="../../Statbotics_files/not_statbotic.ico" alt="Logo">
+                <img src="../../Statbotics_files/NateBotics.ico" alt="Logo">
             </a>
             <div class="nav-links">
                 <a href="../teams.html">Teams</a>

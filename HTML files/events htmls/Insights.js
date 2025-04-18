@@ -86,7 +86,7 @@ function matchesInsightData(eventInfo) {
             "autoEPA": Math.round(team["Auto EPA"] * 10) / 10,
             "teleopEPA": Math.round(team["TeleOp EPA"] * 10) / 10,
             "endgameEPA": Math.round(team["Endgame EPA"] * 10) / 10,
-            "nextEvent": "N/A",
+            "nextEvent": team["Number"]=="10735"?"Worlds":"N/A",
             "record": "N/A",
             "Auto EPA Rank": team["Auto EPA Rank"],
             "TeleOp EPA Rank": team["TeleOp EPA Rank"],
