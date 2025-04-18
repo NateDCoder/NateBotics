@@ -5,45 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./Statbotics_files/NateBotics.ico">
-    <title>Totally Not Statbotics</title>
+    <link rel="stylesheet" href="./css files/navigation.css">
+    <title>NateBotics</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
-        }
-
-        .header {
-            background-color: #333;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
-            align-items: center;
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-container img {
-            width: 32px;
-            /* Adjust size as needed */
-            height: 32px;
-            margin-right: 10px;
-            /* Spacing between image and links */
-        }
-
-        .header a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .header a:hover {
-            text-decoration: underline;
         }
 
         .main-content {
@@ -63,25 +32,6 @@
             font-size: 1.2em;
             margin-bottom: 30px;
         }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .buttons a {
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        .buttons a:hover {
-            background-color: #555;
-        }
     </style>
 </head>
 
@@ -89,8 +39,10 @@
     <div class="header">
         <div class="nav-container">
             <!-- Image next to links -->
-            <img src="./Statbotics_files/logo.svg" alt="Logo">
-            <p><strong>NateBotics</strong></p>
+            <a class="logo" href="#">
+                <img src="./Statbotics_files/logo.svg" alt="Logo">
+                <p><strong>NateBotics</strong></p>
+            </a>
             <p style="width: 20px;"></p>
             <div class="nav-links">
                 <a href="./HTML files/teams.html">Teams</a>

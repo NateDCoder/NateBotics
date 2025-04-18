@@ -1,0 +1,33 @@
+/* Styling the tabs container */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* Styling individual tabs */
+.tab {
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: blue;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Active tab style */
+.tab.active {
+    color: black;
+    border-bottom: 2px solid black;
+}
+
+/* Tab content styles */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}

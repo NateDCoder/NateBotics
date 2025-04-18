@@ -1,0 +1,40 @@
+.red-style {
+    margin: 0 auto;
+    color: rgb(185, 28, 28);
+    padding: 0.3rem;
+    width: 3rem;
+    background-color: rgb(254, 226, 226);
+    border-radius: 0.5rem;
+    text-align: center;
+
+}
+
+.light-green-style {
+    margin: 0 auto;
+    color: rgb(22 101 52);
+    padding: 0.3rem;
+    width: 3rem;
+    background-color: rgb(240 253 244);
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.dark-green-style {
+    margin: 0 auto;
+    color: rgb(22 101 52);
+    padding: 0.3rem;
+    width: 3rem;
+    background-color: rgb(220 252 231);
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.blue-style {
+    margin: 0 auto;
+    color: rgb(30 64 175);
+    padding: 0.3rem;
+    width: 3rem;
+    background-color: rgb(191 219 254);
+    border-radius: 0.5rem;
+    text-align: center;
+}

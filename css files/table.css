@@ -1,0 +1,48 @@
+/* New styles for table */
+.table-container {
+    width: 80%;
+    /* Container spans full width */
+    margin: 0 auto;
+    /* Center the container */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead {
+    position: sticky;
+    top: 0;
+    background-color: #f4f4f4;
+    z-index: 1;
+    /* Ensure it stays above the table rows */
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    cursor: pointer;
+    border-bottom: 4px solid black;
+}
+
+th:hover {
+    background-color: #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+table a:link,
+table a:visited {
+    color: blue;
+}
