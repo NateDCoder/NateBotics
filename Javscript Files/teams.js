@@ -35,7 +35,7 @@ async function fetchTeamList() {
 
 async function populateYears() {
     try {
-        const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app0/api/Year_List');
+        const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/Year_List');
         const years = await response.json();
         console.log(years)
         for (let year of years) {
