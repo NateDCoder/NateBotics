@@ -32,6 +32,26 @@ async function fetchTeamList() {
     const data = await response.json();
     return data;
 }
+
+async function populateYears() {
+    try {
+        const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app0/api/Year_List');
+        const years = await response.json();
+        console.log(years)
+        for (let year of years) {
+            console.log(year)
+            const option = document.createElement("option");
+            option.value = year;
+            option.text = year;
+
+            document.getElementById("years").appendChild(option)
+
+        }
+    } catch (error) {
+        console.error("Unable to fetch data:", error);
+    }
+}
+
 async function fetchJSONData(filePath) {
     try {
         const res = await fetch(filePath);
@@ -151,4 +171,5 @@ async function fetchAndPopulateTable() {
 // Call the function on page load
 document.addEventListener("DOMContentLoaded", () => {
     fetchAndPopulateTable();
+    populateYears();
 });
