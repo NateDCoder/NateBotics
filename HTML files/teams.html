@@ -23,15 +23,53 @@
             text-align: center;
             padding: 50px 20px;
         }
+
+
+
+        .year-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        .dropdown-container {
+            padding-right: 1em;
+            display: inline-block;
+            font-size: 18px;
+        }
+
+        select {
+            padding: 8px 12px;
+            font-size: 18px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: white;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 36px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #2684FF;
+        }
     </style>
 </head>
 
 <body>
     <script src="../Javscript Files/teams.js"></script>
+    <script src="./events htmls/tabCode.js"></script>
     <div class="header">
         <div class="nav-container">
             <!-- Image next to links -->
-            <a class="logo" href="#">
+            <a class="logo" href="../index.html">
                 <img src="../Statbotics_files/logo.svg" alt="Logo">
                 <p><strong>NateBotics</strong></p>
             </a>
@@ -48,27 +86,50 @@
         </div>
     </div>
     <div class="main-content">
-        <div class="table-container">
-            <table id="sortable-table">
-                <thead>
-                    <tr>
-                        <th onclick="sortTable(0)">Number</th>
-                        <th onclick="sortTable(1)">Name</th>
-                        <th onclick="sortTable(2)">EPA Rank</th>
-                        <th onclick="sortTable(3)">Unitless EPA</th>
-                        <th onclick="sortTable(4)">EPA</th>
-                        <th onclick="sortTable(5)">Auto EPA</th>
-                        <th onclick="sortTable(6)">Teleop EPA</th>
-                        <th onclick="sortTable(7)">Endgame EPA</th>
-                        <th onclick="sortTable(8)">Next Event</th>
-                        <th onclick="sortTable(9)">Record</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data is dynamically added -->
-                </tbody>
-            </table>
+        <div class="year-selector">
+            <div class="dropdown-container">
+                <select id="years">
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                    <option>2020</option>
+                    <option>2019</option>
+                </select>
+            </div>
+            <h1>Teams</h1>
         </div>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('insights')">Insights</button>
+            <button class="tab" onclick="showTab('breakdown')">Breakdown</button>
+            <button class="tab" onclick="showTab('bubble-chart')">Bubble Chart</button>
+            <button class="tab" onclick="showTab('figures')">Figures</button>
+        </div>
+        <div id="insights" class="tab-content active">
+            <div class="table-container">
+                <table id="sortable-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Number</th>
+                            <th onclick="sortTable(1)">Name</th>
+                            <th onclick="sortTable(2)">EPA Rank</th>
+                            <th onclick="sortTable(3)">Unitless EPA</th>
+                            <th onclick="sortTable(4)">EPA</th>
+                            <th onclick="sortTable(5)">Auto EPA</th>
+                            <th onclick="sortTable(6)">Teleop EPA</th>
+                            <th onclick="sortTable(7)">Endgame EPA</th>
+                            <th onclick="sortTable(8)">Next Event</th>
+                            <th onclick="sortTable(9)">Record</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data is dynamically added -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="breakdown" class="tab-content">Content for Breakdown</div>
+        <div id="bubble-chart" class="tab-content">Content for Bubble Chart</div>
+        <div id="figures" class="tab-content">Content for Figures</div>
     </div>
 </body>
 
