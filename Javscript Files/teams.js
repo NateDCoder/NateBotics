@@ -27,19 +27,21 @@ function sortTable(columnIndex) {
     tbody.innerHTML = "";
     rows.forEach(row => tbody.appendChild(row));
 }
-async function fetchTeamList() {
+async function fetchTeamList(year) {
     const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/Team_List');
     const data = await response.json();
     return data;
 }
-
+async function getTeamCount(year) {
+    const response = await fetch(`https://international-ashly-waffles-bedc2f70.koyeb.app/api/${year}/Total_Teams_Count`);
+    const teamCount = await response.json();
+    return teamCount;
+}
 async function populateYears() {
     try {
         const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/Year_List');
         const years = await response.json();
-        console.log(years)
         for (let year of years) {
-            console.log(year)
             const option = document.createElement("option");
             option.value = year;
             option.text = year;
@@ -64,14 +66,14 @@ async function fetchJSONData(filePath) {
     }
 }
 
-async function generateRankings() {
-    let teamListData = await fetchTeamList()
+async function generateRankings(year) {
+    let teamListData = await fetchTeamList(year);
     var teamData = [];
     console.log(teamListData)
     for (let team of teamListData) {
         teamData.push({
-            "number": team["Number"],
-            "name": team["Name"],
+            "teamNumber": team["teamNumber"],
+            "name": team["name"],
             "EPA Rank": team["EPA Rank"],
             "unitlessEPA": Math.round(team["Unitless EPA"]),
             "epa": Math.round(team["EPA"] * 10) / 10,
@@ -90,12 +92,13 @@ async function generateRankings() {
 }
 
 // Function to populate the table
-function populateTable(data) {
+async function populateTable(data, year) {
     const tableBody = document.querySelector("#sortable-table tbody");
 
     // Clear existing rows (if any)
     tableBody.innerHTML = "";
-    const totalAmountOfTeams = 533
+    const totalAmountOfTeams = await getTeamCount(year)
+    console.log(totalAmountOfTeams)
     // Loop through the data and create rows
     for (let team of data) {
         const row = document.createElement("tr");
@@ -160,16 +163,17 @@ function populateTable(data) {
 // Fetch JSON data and populate the table
 async function fetchAndPopulateTable() {
     try {
-        const data = await generateRankings(); // Parse JSON
+        const selectedYear = document.getElementById("years").value
+        const data = await generateRankings(selectedYear); // Parse JSON
         console.log(data)
-        populateTable(data); // Populate the table
+        await populateTable(data, selectedYear); // Populate the table
     } catch (error) {
         console.error("Error fetching the JSON data:", error);
     }
 }
 
 // Call the function on page load
-document.addEventListener("DOMContentLoaded", () => {
-    fetchAndPopulateTable();
-    populateYears();
+document.addEventListener("DOMContentLoaded", async () => {
+    await populateYears();
+    await fetchAndPopulateTable();
 });
