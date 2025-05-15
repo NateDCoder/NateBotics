@@ -3,13 +3,28 @@ function sortTable(columnIndex) {
     const tbody = table.querySelector("tbody");
     const rows = Array.from(tbody.querySelectorAll("tr"));
 
-    const isNumeric = !isNaN(rows[0].children[columnIndex].innerText);
+    function parseRecord(str) {
+        const parts = str.split("-").map(Number);
+        return parts.length === 3 ? parts : null;
+    }
+
+    const firstCell = rows[0].children[columnIndex].innerText.trim();
+    const isRecord = /^\d+-\d+-\d+$/.test(firstCell);
+    const isNumeric = !isNaN(firstCell) && !isRecord;
 
     rows.sort((rowB, rowA) => {
-        const cellA = rowA.children[columnIndex].innerText;
-        const cellB = rowB.children[columnIndex].innerText;
+        const cellA = rowA.children[columnIndex].innerText.trim();
+        const cellB = rowB.children[columnIndex].innerText.trim();
 
-        if (isNumeric) {
+        if (isRecord) {
+            const [winsA, lossesA, drawsA] = parseRecord(cellA);
+            const [winsB, lossesB, drawsB] = parseRecord(cellB);
+
+            // Sort by wins descending, then losses ascending, then draws descending
+            if (winsA !== winsB) return winsA - winsB;
+            if (lossesA !== lossesB) return lossesB - lossesA;
+            return drawsB - drawsA;
+        } else if (isNumeric) {
             return parseFloat(cellA) - parseFloat(cellB);
         } else {
             return cellA.localeCompare(cellB);
@@ -27,8 +42,11 @@ function sortTable(columnIndex) {
     tbody.innerHTML = "";
     rows.forEach((row) => tbody.appendChild(row));
 }
+
 async function fetchTeamList(year) {
-    const response = await fetch(`https://international-ashly-waffles-bedc2f70.koyeb.app/api/${year}/Team_List`);
+    const response = await fetch(
+        `https://international-ashly-waffles-bedc2f70.koyeb.app/api/${year}/Team_List`
+    );
     const data = await response.json();
     return data;
 }
@@ -114,7 +132,7 @@ async function populateTable(data, year) {
                 if (index === 1) {
                     // 0-based index, so 1 is the second row
                     const link = document.createElement("a");
-                    link.href = "./team htmls/" + team["number"] + ".html"; // Set the desired link
+                    link.href = "./team htmls/" + team["teamNumber"] + ".html"; // Set the desired link
                     link.textContent = value; // Add the value as the link text
                     cell.appendChild(link);
                 } else if (4 <= index && index <= 7) {
@@ -172,11 +190,16 @@ async function fetchAndPopulateTable() {
     } catch (error) {
         console.error("Error fetching the JSON data:", error);
     }
+    
+    document.getElementById("sortable-table").querySelector("tbody").setAttribute("data-sorted", "");
     sortTable(4);
 }
 
 // Call the function on page load
 document.addEventListener("DOMContentLoaded", async () => {
     await populateYears();
-    await fetchAndPopulateTable();
+    await fetchAndPopulateTable(true);
+    document.getElementById("years").addEventListener("change", async () => {
+        await fetchAndPopulateTable(false);
+    });
 });
