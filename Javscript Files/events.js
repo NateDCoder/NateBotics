@@ -10,7 +10,7 @@ async function generateEvents(year) {
     document.getElementById("total-events").innerText = `Total Events (${events.length})`;
     for (let event of events) {
         const link = document.createElement("a");
-        link.href = "../HTML files/events htmls/" + event.code + ".html";
+        link.href = "../HTML files/event.html?year=" + year + "&event=" + event.code;
         const div = document.createElement("div");
         div.className = "event-card";
         const h3 = document.createElement("h3");

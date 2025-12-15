@@ -98,7 +98,7 @@ function matchesInsightData(eventInfo) {
 }
 
 async function populateInsightTable() {
-    var eventInfo = await getEventInfo();
+    var eventInfo = await fetchEventDetails();
     const insightTable = document.getElementById("insights-table");
     if (!eventInfo["hasTeamList"]) {
         insightTable.innerText = "No Event Info"

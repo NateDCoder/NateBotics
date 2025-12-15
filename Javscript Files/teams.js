@@ -43,26 +43,9 @@ function sortTable(columnIndex) {
     rows.forEach((row) => tbody.appendChild(row));
 }
 
-async function fetchTeamList(year) {
-    const response = await fetch(
-        `https://international-ashly-waffles-bedc2f70.koyeb.app/api/${year}/Team_List`
-    );
-    const data = await response.json();
-    return data;
-}
-async function getTeamCount(year) {
-    const response = await fetch(
-        `https://international-ashly-waffles-bedc2f70.koyeb.app/api/${year}/Total_Teams_Count`
-    );
-    const teamCount = await response.json();
-    return teamCount;
-}
 async function populateYears() {
     try {
-        const response = await fetch(
-            "https://international-ashly-waffles-bedc2f70.koyeb.app/api/Year_List"
-        );
-        const years = await response.json();
+        const years = await fetchYearList();
         for (let year of years) {
             const option = document.createElement("option");
             option.value = year;
@@ -75,19 +58,8 @@ async function populateYears() {
     }
 }
 
-async function fetchJSONData(filePath) {
-    try {
-        const res = await fetch(filePath);
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        return await res.json();
-    } catch (error) {
-        console.error("Unable to fetch data:", error);
-    }
-}
-
 async function generateRankings(year) {
+    console.log(year)
     let teamListData = await fetchTeamList(year);
     var teamData = [];
     for (let team of teamListData) {
@@ -153,18 +125,7 @@ async function populateTable(data, year) {
                             break;
                     }
                     let percentile = 1 - team[rank] / totalAmountOfTeams;
-
-                    if (percentile < 0.25) {
-                        div.className = "red-style";
-                    } else if (percentile < 0.75) {
-                        div.className = "white-style";
-                    } else if (percentile < 0.9) {
-                        div.className = "light-green-style";
-                    } else if (percentile < 0.99) {
-                        div.className = "dark-green-style";
-                    } else {
-                        div.className = "blue-style";
-                    }
+                    div.className = getColorClassStyle(percentile);
                     div.textContent = value;
                     cell.appendChild(div);
                 } else {
@@ -183,9 +144,7 @@ async function populateTable(data, year) {
 async function fetchAndPopulateTable() {
     try {
         const selectedYear = document.getElementById("years").value;
-        console.log(selectedYear);
         const data = await generateRankings(selectedYear);
-        console.log(data);
         await populateTable(data, selectedYear); // Populate the table
     } catch (error) {
         console.error("Error fetching the JSON data:", error);
@@ -198,8 +157,8 @@ async function fetchAndPopulateTable() {
 // Call the function on page load
 document.addEventListener("DOMContentLoaded", async () => {
     await populateYears();
-    await fetchAndPopulateTable(true);
+    await fetchAndPopulateTable();
     document.getElementById("years").addEventListener("change", async () => {
-        await fetchAndPopulateTable(false);
+        await fetchAndPopulateTable();
     });
 });

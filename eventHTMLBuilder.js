@@ -306,7 +306,7 @@ Object.entries(eventNames).forEach(([code, name]) => {
                 </table>
             </div>
         </div>
-        <script src="./helperFunctions.js"></script>
+        <script src="./utils.js"></script>
         <script src="./tabCode.js"></script>
         <script src="./qualMatchs.js"></script>
         <script src="./SOS.js"></script>

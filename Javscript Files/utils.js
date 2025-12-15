@@ -1,31 +1,24 @@
-// const serverURL = "https://international-ashly-waffles-bedc2f70.koyeb.app";
-const serverURL = "http://localhost:3000";
-async function getYears() {
-    try {
-        const response = await fetch(
-            `${serverURL}/api/Year_List`
-        );
-        const years = await response.json();
-        return years;
-    } catch (error) {
-        console.error("Unable to fetch year data:", error);
-        return [];
-    }
-}
-async function fetchEvents(year) {
-    const response = await fetch(`${serverURL}/api/${year}/Event_List`);
-    const data = await response.json();
-    return data;
+// This make it so if your in the 0-25 percentile it red, 25-75 percentile it white, 75-90 percentile it light green, 90-99 percentile it dark green, 99-100 it blue
+function getColorClassStyle(percentile) {
+    return percentile < 0.25 ? "red-style" :
+        percentile < .75 ? "white-style" :
+            percentile < .9 ? "light-green-style" :
+                percentile < .99 ? "dark-green-style" : "blue-style";
 }
 
-async function fetchEventDetails(year, eventCode) {
-    const response = await fetch(`${serverURL}/api/${year}/${eventCode}`);
-    const data = await response.json();
-    return data;
-}
+// Exactly as the name suggests
+function calculateStandardDeviation(numbers) {
+    if (numbers.length === 0) return 0; // Handle empty array
 
-async function fetchQualMatches(year, eventCode) {
-    const response = await fetch(`${serverURL}/api/${year}/${eventCode}/quals`);
-    const data = await response.json();
-    return data;
+    // Step 1: Calculate the mean
+    const mean = numbers.reduce((sum, num) => sum + num, 0) / numbers.length;
+
+    // Step 2: Calculate squared differences from the mean
+    const squaredDiffs = numbers.map(num => Math.pow(num - mean, 2));
+
+    // Step 3: Find the mean of the squared differences
+    const variance = squaredDiffs.reduce((sum, diff) => sum + diff, 0) / numbers.length;
+
+    // Step 4: Take the square root of the variance
+    return Math.sqrt(variance);
 }
