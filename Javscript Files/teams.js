@@ -71,7 +71,7 @@ async function populateYears() {
             document.getElementById("years").appendChild(option);
         }
     } catch (error) {
-        console.error("Unable to fetch data:", error);
+        console.error("Unable to fetch year data:", error);
     }
 }
 
