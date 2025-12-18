@@ -13,6 +13,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     var eventInfo = await fetchEventDetails(year, eventCode);
     document.getElementById("event-name").innerText = eventInfo.name;
     await populateQualMatches(year, eventCode);
-    await populateInsightTable();
+    await populateInsightTable(year, eventCode);
     // populateSOS();
 });

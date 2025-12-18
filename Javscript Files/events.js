@@ -15,6 +15,7 @@ async function generateEvents(year) {
         div.className = "event-card";
         const h3 = document.createElement("h3");
         h3.innerText = event.eventName;
+        console.log(event);
         div.append(h3);
         link.append(div);
         eventContainer.append(link);

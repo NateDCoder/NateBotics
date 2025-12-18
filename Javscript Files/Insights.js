@@ -1,9 +1,9 @@
-function addInsightDataToTable(data) {
+function addInsightDataToTable(data, totalAmountOfTeams) {
     const tableBody = document.querySelector("#insights-table tbody");
 
     // Clear existing rows (if any)
     tableBody.innerHTML = "";
-    const totalAmountOfTeams = 533
+    console.log(totalAmountOfTeams);
     // Loop through the data and create rows
     for (let team of data) {
         const row = document.createElement("tr");
@@ -36,6 +36,7 @@ function addInsightDataToTable(data) {
                             rank = "Endgame EPA Rank"
                             break;
                     }
+                    console.log(team[rank], totalAmountOfTeams);
                     let percentile = 1 - team[rank] / totalAmountOfTeams;
                     div.className = getColorClassStyle(percentile);
                     div.textContent = value
@@ -57,8 +58,8 @@ function noMatchesInsightData(eventInfo) {
     let i = 1;
     for (let team of eventInfo.preEloTeamList) {
         teamData.push({
-            "number": team["Number"],
-            "name": team["Name"],
+            "number": team["teamNumber"],
+            "name": team["teamName"],
             "Estimate Rank":i,
             "epa": Math.round(team["EPA"] * 10) / 10,
             "autoEPA": Math.round(team["Auto EPA"] * 10) / 10,
@@ -77,33 +78,36 @@ function noMatchesInsightData(eventInfo) {
 }
 function matchesInsightData(eventInfo) {
     var teamData = [];
+    let i = 1;
     for (let team of eventInfo.afterEloTeamList) {
+        console.log(team);
         teamData.push({
-            "number": team["Number"],
-            "name": team["Name"],
-            "Rank": team["Rank"],
-            "epa": Math.round(team["EPA"] * 10) / 10,
-            "autoEPA": Math.round(team["Auto EPA"] * 10) / 10,
-            "teleopEPA": Math.round(team["TeleOp EPA"] * 10) / 10,
-            "endgameEPA": Math.round(team["Endgame EPA"] * 10) / 10,
+            "number": team["teamNumber"],
+            "name": team["teamName"],
+            "Rank": team["EPA Rank"] ? team["EPA Rank"] : "N/A",
+            "epa": Math.round(team["totalEPA"] * 10) / 10,
+            "autoEPA": Math.round(team["autonEPA"] * 10) / 10,
+            "teleopEPA": Math.round((team["totalEPA"] - team["autonEPA"] - team["endgameEPA"]) * 10) / 10,
+            "endgameEPA": Math.round(team["endgameEPA"] * 10) / 10,
             "nextEvent": team["Number"]=="10735"?"Worlds":"N/A",
             "record": "N/A",
-            "Auto EPA Rank": team["Auto EPA Rank"],
-            "TeleOp EPA Rank": team["TeleOp EPA Rank"],
-            "Endgame EPA Rank": team["Endgame EPA Rank"],
-            "EPA Rank": team["EPA Rank"]
+            "Auto EPA Rank": team["Auto EPA Rank"]? team["Auto EPA Rank"] : "N/A",
+            "TeleOp EPA Rank": team["TeleOp EPA Rank"] ? team["TeleOp EPA Rank"] : "N/A",
+            "Endgame EPA Rank": team["Endgame EPA Rank"] ? team["Endgame EPA Rank"] : "N/A",
+            "EPA Rank": team["EPA Rank"] ? team["EPA Rank"] : "N/A"
         })
+        i++;
     }
     return teamData;
 }
 
-async function populateInsightTable() {
-    var eventInfo = await fetchEventDetails();
+async function populateInsightTable(year, eventCode) {
+    var eventInfo = await fetchEventDetails(year, eventCode);
     const insightTable = document.getElementById("insights-table");
-    if (!eventInfo["hasTeamList"]) {
+    if (eventInfo.teams.length == 0) {
         insightTable.innerText = "No Event Info"
     }
-    if (!eventInfo["hasScheduleist"]) {
+    if (!eventInfo.completed) {
         insightTable.innerHTML = `<thead>
             <tr>
                 <th onclick="sortTable(0, 'insights-table')">Number</th>
@@ -120,7 +124,8 @@ async function populateInsightTable() {
         <tbody>
             <!-- Data is dynamically added -->
         </tbody>`
-        addInsightDataToTable(noMatchesInsightData(eventInfo));
+        addInsightDataToTable(noMatchesInsightData(eventInfo), eventInfo.teamsCompeted);
+        sortTable(3, 'insights-table')
     } else {
         insightTable.innerHTML = `<thead>
             <tr>
@@ -138,7 +143,8 @@ async function populateInsightTable() {
         <tbody>
             <!-- Data is dynamically added -->
         </tbody>`
-        addInsightDataToTable(matchesInsightData(eventInfo));
+        addInsightDataToTable(matchesInsightData(eventInfo), eventInfo.teamsCompeted);
+        sortTable(3, 'insights-table');
     }
 
 }
