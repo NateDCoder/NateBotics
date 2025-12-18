@@ -1,4 +1,4 @@
-const serverURL = "https://colorful-squid-natebotics-856a73dd.koyeb.app/";
+const serverURL = "https://colorful-squid-natebotics-856a73dd.koyeb.app";
 // const serverURL = "http://localhost:3000";
 async function getYears() {
     try {
