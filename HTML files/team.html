@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPA Over Time</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../Javscript Files/apiCalls.js"></script>
 </head>
 
 <body>
@@ -13,17 +14,17 @@
     <canvas id="epaChart" width="800" height="400"></canvas>
 
     <script>
-        async function generateGraph(params) {
+        async function generateGraph(year, teamNumber) {
             const ctx = document.getElementById('epaChart').getContext('2d');
-            var teamNumber = 10601;
-            var eloOverTime = await getNameToEloOverTime();
-            var teamData = eloOverTime[teamNumber];
-            const labels = Array.from({ length: teamData.length }, (_, i) => i);
+            var teamData = await fetchTeamDetails(year, teamNumber);
+            var epaOverTime = teamData["totalEPAOverTime"];
+            console.log(epaOverTime);
+            const labels = Array.from({ length: epaOverTime.length }, (_, i) => i);
             const epaData = {
                 labels: labels,
                 datasets: [{
                     label: 'EPA',
-                    data: teamData,
+                    data: epaOverTime,
                     borderColor: 'rgba(54, 162, 235, 1)',
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     fill: true,
@@ -68,21 +69,19 @@
             const epaChart = new Chart(ctx, config);
         }
 
-        async function fetchTeamList() {
-            const response = await fetch('https://international-ashly-waffles-bedc2f70.koyeb.app/api/Team_List');
-            const data = await response.json();
-            return data;
-        }
-        async function getNameToEloOverTime() {
-            let teamList = await fetchTeamList();
-            let nameToEloOverTime = {}
-            for (let team of teamList) {
-                nameToEloOverTime[team["Number"]] = team["EPA Over Time"]
+        document.addEventListener("DOMContentLoaded", async () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has("year") && params.has("team")) {
+                var year = params.get("year");
+                var teamNumber = params.get("team");
+            } else {
+                var year = 2025; // Default year
+                params.set("year", year);
+                var teamNumber = 5237; // Default team number
+                params.set("team", teamNumber);
+                window.history.replaceState({}, "", `${location.pathname}?${params}`);
             }
-            return nameToEloOverTime;
-        }
-        document.addEventListener("DOMContentLoaded", () => {
-            generateGraph();
+            await generateGraph(year, teamNumber);
         });
     </script>
 </body>

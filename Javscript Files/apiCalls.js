@@ -1,5 +1,5 @@
-const serverURL = "https://colorful-squid-natebotics-856a73dd.koyeb.app";
-// const serverURL = "http://localhost:3000";
+// const serverURL = "https://colorful-squid-natebotics-856a73dd.koyeb.app";
+const serverURL = "https://nasty-zoe-natebotics-7b2ede31.koyeb.app";
 async function getYears() {
     try {
         const response = await fetch(
@@ -47,6 +47,15 @@ async function getTeamCount(year) {
 
 async function fetchYearList() {
     const response = await fetch(`${serverURL}/api/Year_List`);
+    const data = await response.json();
+    return data;
+}
+
+async function fetchTeamDetails(year, teamNumber) {
+    console.log(year, teamNumber);
+    const response = await fetch(
+        `${serverURL}/api/${year}/team/${teamNumber}`
+    );
     const data = await response.json();
     return data;
 }

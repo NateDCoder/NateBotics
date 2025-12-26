@@ -1,4 +1,4 @@
-function addInsightDataToTable(data, totalAmountOfTeams) {
+function addInsightDataToTable(data, totalAmountOfTeams, year) {
     const tableBody = document.querySelector("#insights-table tbody");
 
     // Clear existing rows (if any)
@@ -16,7 +16,7 @@ function addInsightDataToTable(data, totalAmountOfTeams) {
                 // Check if this is the second row
                 if (index === 1) {  // 0-based index, so 1 is the second row
                     const link = document.createElement("a");
-                    link.href = "../team htmls/" + team["number"] + ".html";  // Set the desired link
+                    link.href = "./team.html?year=" + year + "&team=" + team["number"];  // Set the desired link
                     link.textContent = value;  // Add the value as the link text
                     cell.appendChild(link);
                 } else if (3 <= index && index <= 6) {
@@ -124,7 +124,7 @@ async function populateInsightTable(year, eventCode) {
         <tbody>
             <!-- Data is dynamically added -->
         </tbody>`
-        addInsightDataToTable(noMatchesInsightData(eventInfo), eventInfo.teamsCompeted);
+        addInsightDataToTable(noMatchesInsightData(eventInfo), eventInfo.teamsCompeted, year);
         sortTable(3, 'insights-table')
     } else {
         insightTable.innerHTML = `<thead>
@@ -143,7 +143,7 @@ async function populateInsightTable(year, eventCode) {
         <tbody>
             <!-- Data is dynamically added -->
         </tbody>`
-        addInsightDataToTable(matchesInsightData(eventInfo), eventInfo.teamsCompeted);
+        addInsightDataToTable(matchesInsightData(eventInfo), eventInfo.teamsCompeted, year);
         sortTable(3, 'insights-table');
     }
 

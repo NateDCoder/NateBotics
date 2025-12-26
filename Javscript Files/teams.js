@@ -104,7 +104,7 @@ async function populateTable(data, year) {
                 if (index === 1) {
                     // 0-based index, so 1 is the second row
                     const link = document.createElement("a");
-                    link.href = "./team htmls/" + team["teamNumber"] + ".html"; // Set the desired link
+                    link.href = "./team.html?year=" + year + "&team=" + team["teamNumber"]; // Set the desired link
                     link.textContent = value; // Add the value as the link text
                     cell.appendChild(link);
                 } else if (4 <= index && index <= 7) {
